@@ -27,7 +27,7 @@ AssessFitness <- function(individual, response, user.family="gaussian", predicto
   predictors.individual <- predictors[,individual==1]
 
   #Check distribution family of glm()
-  if(!user.family %in% c("binomial", "gaussian", "gamma", "poisson", "inverse.gaussian")){
+  if(!user.family %in% c("binomial", "gaussian", "Gamma", "poisson", "inverse.gaussian")){
     print(paste("WARNING: User defined distribution family ", user.family, " does not exist", sep=''))
     stop()
     geterrmessage()

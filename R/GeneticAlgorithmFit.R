@@ -1,16 +1,31 @@
-#' Determine the fitness of some model
+#' Apply genetic algorithm
 #'
-#' This function takes a model object assesses its fitness
-#' @param model A model output from lm or glm
+#' GeneticAlgorithmFit is used to apply the genetic algorithm to some input dataset
+#' @param dataset A dataframe
+#' @param response.name The name of the response variable to be predicted, e.g. "salary"
+#' @param user.family Model family name to be passed to glm. Default is "gaussian"
+#' @param flag.log.scale TRUE if the log of the predictor varaible is to be fit. Default is TRUE
+#' @param frac.replace Fraction of best chlildren to replace with best parents in each genetic algorithm iteration
+#' @param Niter Maximum number of iterations. Default is 100
+#' @param mutate.rate Genetic algorithm mutation rate. If set to FALSE it is automatically determined. A value of 0.01 is suggested
+#' @param plot Set to TRUE to plot the evolution of the population of individuals over the progression of the algorithm
 #' @param userfunc A fitness function that operates on a model, provided by the user. Defaults to FALSE. Built in options include "Residual" or "BIC"
+#' @details
+#' Write some details here
+#' @author(s)
+#' Some people
 #' @keywords
 #' @export
 #' @examples
-#' GenericAlgorithmFit()
+#' #Read the dataset
+#' baseball = read.table(file.choose(),header=TRUE)
+#' #Run the algorithm
+#' out <- GeneticAlgorithmFit(dataset=baseball, response.name="salary",
+#'                            userfunc=FALSE, user.family="gaussian",
+#'                           flag.log.scale=TRUE,
+#'                           Niter = 50, frac.replace = 0.2, mutate.rate = 0.005)
 
 
-# -------------------------------------------------------------------
-#MAIN FUNCTION TO APPLY GENETIC ALGORITHM
 GeneticAlgorithmFit <- function(dataset, response.name, userfunc=FALSE, user.family="gaussian", flag.log.scale=TRUE, frac.replace=0.2, Niter=100, mutate.rate=FALSE, plot=TRUE){
 
   #User can define a fitness function, log scale flag, fraction of children to replace with parents, number of iterations and a mutation rate. If these are not provided they are set to dafault

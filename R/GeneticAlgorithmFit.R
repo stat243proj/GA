@@ -10,19 +10,11 @@
 #' @param mutate.rate Genetic algorithm mutation rate. If set to FALSE it is automatically determined. A value of 0.01 #' is suggested
 #' @param plot Set to TRUE to plot the evolution of the population of individuals over the progression of the #' algorithm
 #' @param userfunc A fitness function that operates on a model, provided by the user. Defaults to FALSE. Built in #' options include "Residual" or "BIC"
-#' @details
-#' Write some details here
-#' @author(s)
-#' Some people
 #' @keywords
 #' @export
 #' @examples
 #' baseball = read.table(file.choose(),header=TRUE)
-#'
-#' out <- GeneticAlgorithmFit(dataset=baseball, response.name="salary",
-#'                            userfunc=FALSE, user.family="gaussian",
-#'                           flag.log.scale=TRUE,
-#'                           Niter = 50, frac.replace = 0.2, mutate.rate = 0.005)
+#' out <- GeneticAlgorithmFit(dataset=baseball, response.name="salary",userfunc=FALSE, user.family="gaussian",flag.log.scale=TRUE,Niter = 50, frac.replace = 0.2, mutate.rate = 0.00)
 
 
 GeneticAlgorithmFit <- function(dataset, response.name, userfunc=FALSE, user.family="gaussian", flag.log.scale=TRUE, frac.replace=0.2, Niter=100, mutate.rate=FALSE, plot=TRUE){

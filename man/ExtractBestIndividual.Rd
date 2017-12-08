@@ -10,5 +10,5 @@ ExtractBestIndividual(generation, fitnessmatrix)
 Called from within GeneticAlgorithmFit
 }
 \examples{
-ExtractBestIndividual()
+ExtractBestIndividual(generation,fitnessmatrix)
 }

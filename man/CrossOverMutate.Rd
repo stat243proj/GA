@@ -10,5 +10,5 @@ CrossOverMutate(generation, parent.index, prob.mutate)
 This function takes a model object assesses its fitness
 }
 \examples{
-CrossOverMutate()
+CrossOverMutate(generation,parent.index,prob.mutate)
 }

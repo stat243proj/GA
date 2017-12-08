@@ -7,7 +7,7 @@
 #' @keywords
 #' @export
 #' @examples
-#' ReplaceClones()
+#' ReplaceClones(generation,fitness.vec.C)
 
 
 # -------------------------------------------------------------------

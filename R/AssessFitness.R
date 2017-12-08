@@ -21,20 +21,20 @@
 # **may be worth it to treat 'predictors' as global variable or object
 
 AssessFitness <- function(individual, response, user.family="gaussian", predictors, userfunc=FALSE){
-  
+
   #Evaluate the fitness of some model, output from glm
   #The userfunc should take a fitted model and output a scalar fitness value
-  
+
   #if model selects one or zero predictors, then add 2 predictors to the model
   if((sum(individual) == 0) || (sum(individual) == 1)){
     individual[sample(1:length(individual), 2)] = 1
   }
-  
+
   predictors.individual <- predictors[,individual==1]
-  
+
   #Check distribution family of glm()
   if(!user.family %in% c("binomial", "gaussian", "Gamma", "poisson", "inverse.gaussian")){
-    print(paste("WARNING: User defined distribution family ", user.family, " is not existed", sep=''))
+    print(paste("WARNING: User defined distribution family ", user.family, "does not exist", sep=''))
     fitness.value = NULL
   }
   else{

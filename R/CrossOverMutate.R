@@ -7,7 +7,7 @@
 #' @keywords
 #' @export
 #' @examples
-#' CrossOverMutate()
+#' CrossOverMutate(generation,parent.index,prob.mutate)
 
 # -------------------------------------------------------------------
 # CrossOverMutate
@@ -16,34 +16,36 @@
 
 #Changes made by Kexin Fei, Shan Gao
 CrossOverMutate <- function(generation, parent.index, prob.mutate){
-  
+
   #Create child individual with half of its genetic material from parent1 and the other half from parent2
   #The generic material is chosen at random using sample
   parent1 <- generation[[parent.index[1]]]
   parent2 <- generation[[parent.index[2]]]
-  
+
   child1 <- parent1
   child2 <- parent2
   #generate locations of genetic information to swap
   pos <- sample(1:length(parent2),as.integer(length(parent2)/2),replace=FALSE)
   child1[pos] <- parent2[pos]
   child2[pos] <- parent1[pos]
-  
+
   #generate mutation vector
   mutate1 = rbinom(length(child1),1,prob.mutate)
   mutate2 = rbinom(length(child2),1,prob.mutate)
-  #do the mutation - this will ensure that if a 2 is produced, 
+  #do the mutation - this will ensure that if a 2 is produced,
   #set to zero. If not, keeps as 1.
   child1 = (child1+mutate1)%%2
   child2 = (child2+mutate2)%%2
-  
+
+  #RMS - don't think we need this here since we do the predictor addition in AssessFitness
+
   #if model selects less than 1 predictors, add 2 predictors to the model
-  if(sum(child1) <= 1){ 
-    child1[sample(1:length(child1), 2)] = 1  
-  }
-  if(sum(child1) <= 1){ 
-    child2[sample(1:length(child2), 2)] = 1
-  }
+  #if(sum(child1) <= 1){
+  #  child1[sample(1:length(child1), 2)] = 1
+  #}
+  #if(sum(child1) <= 1){
+  #  child2[sample(1:length(child2), 2)] = 1
+  #}
   child = data.frame(child1, child2)
   return(child)
 }

@@ -6,7 +6,7 @@
 #' @keywords
 #' @export
 #' @examples
-#' ExtractBestIndividual()
+#' ExtractBestIndividual(generation,fitnessmatrix)
 
 
 # -------------------------------------------------------------------

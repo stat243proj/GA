@@ -10,5 +10,5 @@ ReplaceClones(generation, fitness.vec, C)
 Called from within GeneticAlgorithmFit
 }
 \examples{
-ReplaceClones()
+ReplaceClones(generation,fitness.vec.C)
 }

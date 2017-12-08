@@ -16,7 +16,6 @@
 #' baseball = read.table(file.choose(),header=TRUE)
 #' out <- GeneticAlgorithmFit(dataset=baseball, response.name="salary",userfunc=FALSE, user.family="gaussian",flag.log.scale=TRUE,Niter = 50, frac.replace = 0.2, mutate.rate = 0.00)
 
-
 GeneticAlgorithmFit <- function(dataset, response.name, userfunc=FALSE, user.family="gaussian", flag.log.scale=TRUE, frac.replace=0.2, Niter=100, mutate.rate=FALSE, plot=TRUE){
 
   #User can define a fitness function, log scale flag, fraction of children to replace with parents, number of iterations and a mutation rate. If these are not provided they are set to dafault

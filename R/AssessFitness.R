@@ -1,7 +1,10 @@
 #' Determine the fitness of some model
 #'
-#' This function takes a model object assesses its fitness
-#' @param model A model output from lm or glm
+#' Called from within GeneticAlgorithmFit
+#' @param individual
+#' @param response
+#' @param user.family
+#' @param predictors
 #' @param userfunc A fitness function that operates on a model, provided by the user. Defaults to FALSE. Built in options include "Residual" or "BIC"
 #' @keywords
 #' @export

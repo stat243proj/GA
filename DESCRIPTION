@@ -1,12 +1,10 @@
 Package: GA
 Type: Genetic Algorithm Package for STAT243 class
-Title: Appllies a modified genetic algorithm to some dataset, in order to assess what combination of predictor variables are best able to predict the
-values of a response variable
+Title: Appllies a modified genetic algorithm to some dataset, in order to assess what combination of predictor variables are best able to predict
 Version: 0.1.0
 Author: Who wrote it
 Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: This is what it does
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true

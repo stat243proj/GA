@@ -2,20 +2,35 @@
 % Please edit documentation in R/GeneticAlgorithmFit.R
 \name{GeneticAlgorithmFit}
 \alias{GeneticAlgorithmFit}
-\title{Determine the fitness of some model}
+\title{Apply genetic algorithm}
 \usage{
 GeneticAlgorithmFit(dataset, response.name, userfunc = FALSE,
   user.family = "gaussian", flag.log.scale = TRUE, frac.replace = 0.2,
   Niter = 100, mutate.rate = FALSE, plot = TRUE)
 }
 \arguments{
-\item{userfunc}{A fitness function that operates on a model, provided by the user. Defaults to FALSE. Built in options include "Residual" or "BIC"}
+\item{dataset}{A dataframe}
 
-\item{model}{A model output from lm or glm}
+\item{response.name}{The name of the response variable to be predicted, e.g. "salary"}
+
+\item{userfunc}{A fitness function that operates on a model, provided by the user. Defaults to FALSE. Built in #' options include "Residual" or "BIC"}
+
+\item{user.family}{Model family name to be passed to glm. Default is "gaussian"}
+
+\item{flag.log.scale}{TRUE if the log of the predictor varaible is to be fit. Default is TRUE}
+
+\item{frac.replace}{Fraction of best chlildren to replace with best parents in each genetic algorithm iteration}
+
+\item{Niter}{Maximum number of iterations. Default is 100}
+
+\item{mutate.rate}{Genetic algorithm mutation rate. If set to FALSE it is automatically determined. A value of 0.01 #' is suggested}
+
+\item{plot}{Set to TRUE to plot the evolution of the population of individuals over the progression of the #' algorithm}
 }
 \description{
-This function takes a model object assesses its fitness
+GeneticAlgorithmFit is used to apply the genetic algorithm to some input dataset
 }
 \examples{
-GenericAlgorithmFit()
+baseball = read.table(file.choose(),header=TRUE)
+out <- GeneticAlgorithmFit(dataset=baseball, response.name="salary",userfunc=FALSE, user.family="gaussian",flag.log.scale=TRUE,Niter = 50, frac.replace = 0.2, mutate.rate = 0.00)
 }

@@ -9,14 +9,13 @@
 #' @examples
 #' ExtractResponseVariable()
 # function to get separate response variable from predictors
-
 #Changes made by Kexin Fei, Yachen Wang, Shan Gao
 ExtractResponseVariable <- function(dataset,name) {
   #Takes a dataframe, dataset and a name of a response variable
   #Extracts the response variable and dataframe of predictors, outputs these as members 
   #of a list
   
-  if(sum(!sapply(dataset[, -which(names(dataset)==name)], class %in% c("numeric", "integer"))>0)){
+  if(sum(!(sapply(dataset[, -which(names(dataset)==name)], class) %in% c("numeric", "integer"))>0)){
     print("WARNING: There exists certain non-numeric predictor(s)")
     stop()
     geterrmessage()
@@ -43,4 +42,5 @@ ExtractResponseVariable <- function(dataset,name) {
     return(list(0L,0L))
   }
 }
+
 

@@ -6,11 +6,6 @@
 \usage{
 CrossOverMutate(generation, parent.index, prob.mutate)
 }
-\arguments{
-\item{model}{A model output from lm or glm}
-
-\item{userfunc}{A fitness function that operates on a model, provided by the user. Defaults to FALSE. Built in options include "Residual" or "BIC"}
-}
 \description{
 This function takes a model object assesses its fitness
 }

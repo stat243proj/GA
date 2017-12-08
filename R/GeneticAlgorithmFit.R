@@ -7,9 +7,9 @@
 #' @param flag.log.scale TRUE if the log of the predictor varaible is to be fit. Default is TRUE
 #' @param frac.replace Fraction of best chlildren to replace with best parents in each genetic algorithm iteration
 #' @param Niter Maximum number of iterations. Default is 100
-#' @param mutate.rate Genetic algorithm mutation rate. If set to FALSE it is automatically determined. A value of 0.01 is suggested
-#' @param plot Set to TRUE to plot the evolution of the population of individuals over the progression of the algorithm
-#' @param userfunc A fitness function that operates on a model, provided by the user. Defaults to FALSE. Built in options include "Residual" or "BIC"
+#' @param mutate.rate Genetic algorithm mutation rate. If set to FALSE it is automatically determined. A value of 0.01 #' is suggested
+#' @param plot Set to TRUE to plot the evolution of the population of individuals over the progression of the #' algorithm
+#' @param userfunc A fitness function that operates on a model, provided by the user. Defaults to FALSE. Built in #' options include "Residual" or "BIC"
 #' @details
 #' Write some details here
 #' @author(s)
@@ -17,9 +17,8 @@
 #' @keywords
 #' @export
 #' @examples
-#' #Read the dataset
 #' baseball = read.table(file.choose(),header=TRUE)
-#' #Run the algorithm
+#'
 #' out <- GeneticAlgorithmFit(dataset=baseball, response.name="salary",
 #'                            userfunc=FALSE, user.family="gaussian",
 #'                           flag.log.scale=TRUE,

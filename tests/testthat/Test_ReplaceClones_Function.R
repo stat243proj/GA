@@ -17,3 +17,4 @@ test_ReplaceClones <- function(dataset, response.name){
     expect_equal(length(ReplaceClones(generation.old, fitness, C)$generation), P)
   })
 }
+

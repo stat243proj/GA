@@ -65,13 +65,13 @@ Select <- function(dataset, response.name, userfunc="AIC", user.family="gaussian
     prob.mutate <<- mutate.rate
   }
 
-  fitness <<- matrix(0,P,Niter) #evolution of the fitness values over model run
+  fitness <- matrix(0,P,Niter) #evolution of the fitness values over model run
 
   # Define first generation
-  generation.old <<- lapply(1:P, function(x) {rbinom(C, 1, 0.5)}) # list of individual genomes
+  generation.old <- lapply(1:P, function(x) {rbinom(C, 1, 0.5)}) # list of individual genomes
 
   #assess fitness of the first generation
-  fitness[,1] <<- sapply(generation.old, AssessFitness, response = response, user.family, predictors = predictors, userfunc)
+  fitness[,1] <- sapply(generation.old, AssessFitness, response = response, user.family, predictors = predictors, userfunc)
 
   # -------------------------------------------------------------------
   # MAIN LOOP for genetic algorithm

@@ -18,6 +18,6 @@ test_CrossOverMutate <- function(dataset, response.name){
   test_that("Check the output and the dimension of return value(a child genome) from Cross_over_mutate function is 2*C",{
     expect_equal(length(unlist(CrossOverMutate(generation.old, c(1,2), prob.mutate))), 2*C)
     expect_equal(CrossOverMutate(generation.old, c(1,2), prob.mutate)[[1]],
-                 c(1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1))
+                 c(0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1))
   })
 }

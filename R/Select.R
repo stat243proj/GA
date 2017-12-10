@@ -52,7 +52,7 @@ Select <- function(dataset, response.name, userfunc="AIC", user.family="gaussian
   # Define/create key variables a priori
   # These variables are accessible to all genalg functions
 
-  C <- length(predictors) #Get the number of predictors (GLOBAL)
+  Ncovar <- length(predictors) #Get the number of predictors (GLOBAL)
   P <- as.integer(C*1.5) #number of individuals in a given generation (GLOBAL)
   P <- 2*ceiling(P/2) # Force P to be even due to a future need to 'split' a generation in two
 

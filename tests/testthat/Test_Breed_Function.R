@@ -22,6 +22,6 @@ test_Breed <- function(dataset, response.name){
                 lapply(Breed(generation.old, fitness[,1], prob.mutate),function(x) length(unlist(x))
                 ))), C)
               expect_equal(Breed(generation.old, fitness[,1], prob.mutate)[[1]], 
-               c(0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0))
+               c(0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1))
 })
 }

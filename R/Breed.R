@@ -22,6 +22,7 @@ Breed <- function(generation, fitness.vec, prob.mutate) {
 
   # generation is a list with each element containing the genome of an individual
   # fitness.vec is a vector
+  P <- length(fitness.vec)
   prob.reproduction <- 2*rank(-fitness.vec)/(P*(P+1))
   parent.index.list <- lapply(1:P, function(x) sample(P, size=2,prob = prob.reproduction,replace=FALSE))
 

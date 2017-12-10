@@ -16,6 +16,6 @@ test_that("Check the output of the ReplaceClones function is correct",{
 
   test_that("check the dimension of return generation from ReplaceClones function is correct",{
     expect_length(ReplaceClones(lapply(1:40, function(x) {rep(1, times=27)}),
-                                matrix(0,40,100), 27)$generation, 40)
+                                rnorm(40, 700, 1), 27)$generation, 40)
   })
 

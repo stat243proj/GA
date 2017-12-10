@@ -135,7 +135,7 @@ Select <- function(dataset, response.name, userfunc="AIC", user.family="gaussian
   }
   stop <- Sys.time()
 
-  best.model <- ExtractBestIndividual(generation.new, generation.new.fitness, plot.flag)
+  best.model <- ExtractBestIndividual(generation.new, generation.new.fitness)
 
 
 

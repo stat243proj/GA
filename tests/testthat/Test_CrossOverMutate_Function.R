@@ -20,7 +20,6 @@ test_that("Check the value of return value from CrossOverMutate function with an
   })
   
   test_that("Check the dimension of return value(a child genome) from CrossOverMutate function is correct",{
-    set.seed(1)
-    generation <- lapply(1:40, function(x) {rbinom(27, 1, 0.5)})
+    generation <- lapply(1:40, function(x) {rep(1, times=27)})
     expect_length(unlist(CrossOverMutate(generation, c(1,2), 0.004811252)), 54)
   })

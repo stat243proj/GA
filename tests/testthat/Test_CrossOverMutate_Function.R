@@ -12,9 +12,13 @@ test_CrossOverMutate <- function(dataset, response.name){
   P <<- 2*ceiling(P/2)
   prob.mutate <- 1.0/(P*sqrt(C))
   generation.old <- lapply(1:P, function(x) {rbinom(C,1,0.5)})
+  set.seed(1)
   
   #test CrossOverMutate function
-  test_that("Check the dimension of return value(a child genome) from Cross_over_mutate function is C",{
+  test_that("Check the output and the dimension of return value(a child genome) from Cross_over_mutate function is 2*C",{
     expect_equal(length(unlist(CrossOverMutate(generation.old, c(1,2), prob.mutate))), 2*C)
+    set.seed(1)
+    expect_equal(CrossOverMutate(generation.old, c(1,2), prob.mutate)[[1]],
+                 c(1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1))
   })
 }

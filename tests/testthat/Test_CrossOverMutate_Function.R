@@ -1,23 +1,9 @@
 #Test the CrossOverMutate function
 context("Test the dimension of the output of CrossOverMutate function")
 
-test_CrossOverMutate <- function(dataset, response.name){
-  require(testthat)
-  
-  subsets <- ExtractResponseVariable(dataset, response.name)
-  predictors <- subsets[[2]]
-  C <- length(predictors)
-  Niter <<- Niter
-  P <- as.integer(C*1.5)
-  P <<- 2*ceiling(P/2)
-  prob.mutate <- 1.0/(P*sqrt(C))
-  set.seed(1)
-  generation.old <- lapply(1:P, function(x) {rbinom(C,1,0.5)})
-  
-  #test CrossOverMutate function
-  test_that("Check the output and the dimension of return value(a child genome) from Cross_over_mutate function is 2*C",{
-    expect_equal(length(unlist(CrossOverMutate(generation.old, c(1,2), prob.mutate))), 2*C)
-    expect_equal(CrossOverMutate(generation.old, c(1,2), prob.mutate)[[1]],
-                 c(0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1))
+#test CrossOverMutate function
+  test_that("Check the dimension of return value(a child genome) from Cross_over_mutate function is C",{
+    set.seed(1)
+    generation <- lapply(1:40, function(x) {rbinom(27, 1, 0.5)})
+    expect_equal(length(unlist(CrossOverMutate(generation, c(1,2), 0.004811252))), 54)
   })
-}

@@ -18,7 +18,7 @@
 #' \code{\link{glm}}
 #' \code{\link{lm}}
 
-ExtractBestIndividual <- function(generation, fitness.vec, plot.flag=FALSE){
+ExtractBestIndividual <- function(generation, fitness.vec){
 
   #Extract the best individual and its corresponding fitness, and print a set of
   #summary statistics
@@ -28,9 +28,7 @@ ExtractBestIndividual <- function(generation, fitness.vec, plot.flag=FALSE){
   best.individual <- generation[[best.index]]
   predictors.individual <- predictors[,best.individual==1]
   best.model <- lm(response[,1]~., predictors.individual)
-  if (plot.flag == TRUE) {
-    print(summary(best.model))
-    print(best.individual)
-  }
+  print(summary(best.model))
+  print(best.individual)
   return(best.model)
 }

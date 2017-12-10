@@ -31,8 +31,8 @@ CrossOverMutate <- function(generation, parent.index, prob.mutate=0.005){
   child2[pos] <- parent1[pos]
 
   # generate mutation vector
-  mutate1 = rbinom(C,1,prob.mutate)
-  mutate2 = rbinom(C,1,prob.mutate)
+  mutate1 = rbinom(length(parent1),1,prob.mutate)
+  mutate2 = rbinom(length(parent1),1,prob.mutate)
 
   # do the mutation - this will ensure that if a 2 is produced,
   # set to zero. If not, keeps as 1.

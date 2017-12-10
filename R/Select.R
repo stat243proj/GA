@@ -82,7 +82,7 @@ Select <- function(dataset, response.name, userfunc="AIC", user.family="gaussian
   for (n in 1:(Niter-1)) { #Niter -1 because we've already made the first generation
 
     # breed selection of P children and assess their fitness
-    children <- Breed(generation.old, fitness[,n], predictors, prob.mutate)
+    children <- Breed(generation.old, fitness[,n], prob.mutate)
 
     children.fitness <- sapply(children, AssessFitness, response = response, user.family, predictors = predictors, userfunc)
     number.children.keep <- round((1-frac.replace)*P)

@@ -13,7 +13,7 @@
 #' @export
 #' @examples
 #'
-#'\code{\link[GA]{Select}}
+#' \code{\link[GA]{Select}}
 #'
 
 ExtractResponseVariable <- function(dataset, response.name) {
@@ -23,19 +23,19 @@ ExtractResponseVariable <- function(dataset, response.name) {
     dataset <- dataset[!is.na(dataset[,1])]
   }
   else{
-    if (name %in% colnames(dataset)) {
+    if (response.name %in% colnames(dataset)) {
 
-      name <- as.character(name)
+      response.name <- as.character(response.name)
 
       #Get matrix of predictors
       predictors <- dataset
-      predictors[name] <- NULL
+      predictors[response.name] <- NULL
 
       #Get response variable
-      response <- dataset[name]
+      response <- dataset[response.name]
       return(list(response,predictors))
     } else {
-      print(paste("Name ",name," not found in dataset",sep=''))
+      print(paste("Name ", response.name," not found in dataset",sep=''))
       return(list(0L,0L))
     }
   }

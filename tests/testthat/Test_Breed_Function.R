@@ -21,7 +21,7 @@ test_that("With the baseball data, check the dimension and length of return list
               generation <- lapply(1:40, function(x) {rbinom(C, 1, 0.5)})
               set.seed(1)
               fitness.vec <- rnorm(40, 700, 1)
-              expect_length(Breed(generation, fitness.vec, 0.004811252), 39)
+              expect_length(Breed(generation, fitness.vec, 0.004811252), 40)
               expect_equal(unique(unlist(
                 lapply(Breed(generation, fitness.vec, 0.004811252),function(x) length(unlist(x))
                 ))), 27)

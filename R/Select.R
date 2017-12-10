@@ -120,22 +120,25 @@ Select <- function(dataset, response.name, userfunc="AIC", user.family="gaussian
     #generation.old.worst.index <- which(rank(-fitness[,n])<=round(frac.replace*P)) # select worst parent by rank
     generation.old <- generation.new # keep most of prior generation
     fitness[,n+1] <- generation.new.fitness # keep most of prior generation fitness data
+    
+    print(min(generation.new.fitness))
+    
+  #If user wants to plot the evolution of the population over time, do so
 
+    if (plot.flag == TRUE) {
+
+
+    plot(-fitness,xlim=c(0,Niter),ylim=c(min(fitness), max(fitness)),type="n",ylab="Negative fitness value",
+         xlab="Generation",main="Fitness values For Genetic Algorithm")
+    for(i in 1:Niter){points(rep(i,P),-fitness[,i],pch=20)
+                     }
+    }
   }
   stop <- Sys.time()
 
   best.model <- ExtractBestIndividual(generation.new, generation.new.fitness, plot.flag)
 
 
-  #If user wants to plot the evolution of the population over time, do so
-
-  if (plot.flag == TRUE) {
-
-    print(min(generation.new.fitness))
-    plot(-fitness,xlim=c(0,Niter),ylim=c(min(fitness), max(fitness)),type="n",ylab="Negative fitness value",
-         xlab="Generation",main="Fitness values For Genetic Algorithm")
-    for(i in 1:Niter){points(rep(i,P),-fitness[,i],pch=20)}
-  }
 
 
   # show run time

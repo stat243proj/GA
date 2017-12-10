@@ -9,10 +9,9 @@ test_ReplaceClones <- function(dataset, response.name){
   P <<- as.integer(C*1.5)
   predictors <- dataset
   prob.mutate <- 1.0/(P*sqrt(C))
+  set.seed(1)
   generation.old <- lapply(1:P, function(x) {rbinom(C,1,0.5)})
   fitness <- matrix(0,P,Niter)
-  
-  set.seed(1)
   
   #test ReplaceClones function
   test_that("Check the dimension of return generation from ReplaceClones function is P",{

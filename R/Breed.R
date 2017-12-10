@@ -23,7 +23,7 @@ Breed <- function(generation, fitness.vec, prob.mutate) {
   # generation is a list with each element containing the genome of an individual
   # fitness.vec is a vector
   prob.reproduction <- 2*rank(-fitness.vec)/(P*(P+1))
-  parent.index.list <- lapply(1:P, function(x) sample(P,2,prob = prob.reproduction,replace=FALSE))
+  parent.index.list <- lapply(1:P, function(x) sample(x=1:P, size=2,prob = prob.reproduction,replace=FALSE))
 
   child.pairs <- lapply(parent.index.list, function(x) CrossOverMutate(generation, x, prob.mutate))
   # collate list of P child pairs into a single generation (list) of P children

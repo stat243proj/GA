@@ -53,12 +53,12 @@ Select <- function(dataset, response.name, userfunc="AIC", user.family="gaussian
   # These variables are accessible to all genalg functions
 
   Ncovar <- length(predictors) #Get the number of predictors (GLOBAL)
-  P <- as.integer(C*1.5) #number of individuals in a given generation (GLOBAL)
+  P <- as.integer(Ncovar*1.5) #number of individuals in a given generation (GLOBAL)
   P <- 2*ceiling(P/2) # Force P to be even due to a future need to 'split' a generation in two
 
   #Set the mutation rate
   if (mutate.rate == FALSE) {
-    prob.mutate <- 1.0/(P*sqrt(C)) #mutation rate (should be about 1%) Formula suggested by G&H
+    prob.mutate <- 1.0/(P*sqrt(Ncovar)) #mutation rate (should be about 1%) Formula suggested by G&H
   }
   else {
     prob.mutate <- mutate.rate
@@ -67,7 +67,7 @@ Select <- function(dataset, response.name, userfunc="AIC", user.family="gaussian
   fitness <- matrix(0,P,Niter) #evolution of the fitness values over model run
 
   # Define first generation
-  generation.old <- lapply(1:P, function(x) {rbinom(C, 1, 0.5)}) # list of individual genomes
+  generation.old <- lapply(1:P, function(x) {rbinom(Ncovar, 1, 0.5)}) # list of individual genomes
 
   #assess fitness of the first generation
   fitness[,1] <- sapply(generation.old, AssessFitness, response = response, user.family, predictors = predictors, userfunc)
@@ -112,7 +112,7 @@ Select <- function(dataset, response.name, userfunc="AIC", user.family="gaussian
     }
 
     # check next generation for clones and replace them with random individuals if necessary
-    clones.removed <- ReplaceClones(generation.new, generation.new.fitness, C)
+    clones.removed <- ReplaceClones(generation.new, generation.new.fitness)
     generation.new <- clones.removed$generation
     generation.new.fitness <- clones.removed$fitness
 

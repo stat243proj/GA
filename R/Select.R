@@ -53,16 +53,15 @@ Select <- function(dataset, response.name, userfunc="AIC", user.family="gaussian
   # These variables are accessible to all genalg functions
 
   C <- length(predictors) #Get the number of predictors (GLOBAL)
-  Niter <<- Niter #number of iterations
   P <- as.integer(C*1.5) #number of individuals in a given generation (GLOBAL)
-  P <<- 2*ceiling(P/2) # Force P to be even due to a future need to 'split' a generation in two
+  P <- 2*ceiling(P/2) # Force P to be even due to a future need to 'split' a generation in two
 
   #Set the mutation rate
   if (mutate.rate == FALSE) {
-    prob.mutate <<- 1.0/(P*sqrt(C)) #mutation rate (should be about 1%) Formula suggested by G&H
+    prob.mutate <- 1.0/(P*sqrt(C)) #mutation rate (should be about 1%) Formula suggested by G&H
   }
   else {
-    prob.mutate <<- mutate.rate
+    prob.mutate <- mutate.rate
   }
 
   fitness <- matrix(0,P,Niter) #evolution of the fitness values over model run

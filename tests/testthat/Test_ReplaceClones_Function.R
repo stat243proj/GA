@@ -1,22 +1,15 @@
 #Test the ReplaceClones function
-context("Test the dimension of the output of ReplaceClones function")
+context("Test the dimension and value of the output of ReplaceClones function")
 
-test_ReplaceClones <- function(dataset, response.name){
-  require(testthat)
-  
-  C <- length(predictors)
-  Niter <<- Niter
-  P <<- as.integer(C*1.5)
-  predictors <- dataset
-  prob.mutate <- 1.0/(P*sqrt(C))
-  set.seed(1)
-  generation.old <- lapply(1:P, function(x) {rbinom(C,1,0.5)})
-  fitness <- matrix(0,P,Niter)
-  
-  #test ReplaceClones function
-  test_that("Check the dimension of return generation from ReplaceClones function is P",{
-    expect_equal(length(ReplaceClones(generation.old, fitness, C)$generation), P)
-    expect_equal(round(ReplaceClones(generation.old, fitness, C)$fitness[2,1]), 5562)
+test_that("Check the output of the ReplaceClones function is correct",{
+    
+    expect_equal(ReplaceClones(lapply(1:40, function(x) {rep(1, times=27)}), 
+                                     matrix(0,40,100), 27)$generation[[1]], 
+                 c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1))
   })
-}
+
+  test_that("check the dimension of return generation from ReplaceClones function is correct",{
+    expect_length(ReplaceClones(lapply(1:40, function(x) {rep(1, times=27)}),
+                                matrix(0,40,100), 27)$generation, 40)
+  })
 

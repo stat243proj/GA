@@ -21,11 +21,12 @@
 #'
 #' \code{\link[GA]{Select}}
 
-ReplaceClones <- function(generation, fitness.vec, C) {
+ReplaceClones <- function(generation, fitness.vec) {
 
+  Ncovar <- length(generation[[1]])
   clone.index <- which(duplicated(fitness.vec))
   N.clones <- length(clone.index)
-  replacements <- lapply(1:N.clones, function(x) {rbinom(C,1,0.5)}) # list of new individual genomes
+  replacements <- lapply(1:N.clones, function(x) {rbinom(Ncovar,1,0.5)}) # list of new individual genomes
   generation[clone.index] <- replacements
   # the followin is to avoid computing fitness for the majority of non-clones
   fitness.replacements <- sapply(replacements, AssessFitness, response = response, predictors = predictors)

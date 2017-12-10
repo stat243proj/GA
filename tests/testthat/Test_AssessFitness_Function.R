@@ -2,7 +2,7 @@
 
 context("Test the return value of AssessFitness function")
 
-test_that("Check the return value of AssessFitness function",{
+test_that("Check the return value of AssessFitness function with baseball data",{
   expect_equal(round(AssessFitness(rep(1, times=27),baseball.dat["salary"], baseball.dat, 
                                user.family = "gaussian", userfunc = "AIC")), -18653)
   })

@@ -26,7 +26,7 @@ CrossOverMutate <- function(generation, parent.index, prob.mutate=0.005){
   child2 <- parent2
 
   # generate locations of genetic information to swap
-  pos <- sample(1:C,as.integer(C/2),replace=FALSE)
+  pos <- sample(c(1:C),as.integer(C/2),replace=FALSE)
   child1[pos] <- parent2[pos]
   child2[pos] <- parent1[pos]
 

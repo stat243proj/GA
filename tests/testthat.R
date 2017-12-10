@@ -3,15 +3,15 @@ library(GA)
 
 test_check("GA")
 
-predictors <- dataset
-C <- length(predictors)
-Niter <<- Niter
-P <<- as.integer(C*1.5)
-prob.mutate <- 1.0/(P*sqrt(C))
-generation.old <- lapply(1:P, function(x) {rbinom(C,1,0.5)})
-fitness <- matrix(0,P,Niter)
-model.out <- lm(response[,1]~., predictors.individual)
-fitness.value <- extractAIC(model.out)[2]
+test_all <- function(dataset, response.name){
+  require(testthat)
+  predictors <- dataset
+  C <- length(predictors)
+  Niter <<- Niter
+  P <<- as.integer(C*1.5)
+  prob.mutate <- 1.0/(P*sqrt(C))
+  generation.old <- lapply(1:P, function(x) {rbinom(C,1,0.5)})
+  fitness <- matrix(0,P,Niter)
 
 #test the Breed function
 test_that("Check the dimension of return list from Breed function is P embeded lists, 
@@ -27,7 +27,12 @@ test_that("Check the dimension of return value(a child genome) from Cross_over_m
   expect_equal(length(unlist(CrossOverMutate(generation.old, c(1,2), prob.mutate))), 2*C)
 })
 
+set.seed(1)
+
 #test ReplaceClones function
 test_that("Check the dimension of return generation from ReplaceClones function is P",{
   expect_equal(length(ReplaceClones(generation.old, fitness, C)$generation), P)
+  expect_equal(round(ReplaceClones(generation.old, fitness, C)$fitness[2,1]), 830)
 })
+
+}

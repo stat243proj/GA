@@ -2,38 +2,54 @@
 % Please edit documentation in R/Select.R
 \name{Select}
 \alias{Select}
-\title{Apply genetic algorithm}
+\title{Apply a genetic algorithm to find the optimal co-variates in a linear regression}
 \usage{
-Select(dataset, response.name, userfunc = FALSE, user.family = "gaussian",
+Select(dataset, response.name, userfunc = "AIC", user.family = "gaussian",
   flag.log.scale = TRUE, frac.replace = 0.2, Niter = 100,
-  mutate.rate = FALSE, plot = TRUE)
+  mutate.rate = FALSE, plot.flag = TRUE)
 }
 \arguments{
-\item{dataset}{A dataframe}
+\item{dataset}{A matrix, datatable, or dataframe}
 
-\item{response.name}{The name of the response variable to be predicted, e.g. "salary"}
+\item{response.name}{The name of the column in \strong{dataset} that will act as the
+response variable to be predicted}
 
-\item{userfunc}{A fitness function that operates on a model, provided by the user. Defaults to FALSE. Built in #' options include "Residual" or "BIC"}
+\item{userfunc}{A fitness function that operates on a model that could be provided by the user.
+The default is the Aikake Information Criteria or "AIC".}
 
 \item{user.family}{Model family name to be passed to glm. Default is "gaussian"}
 
-\item{flag.log.scale}{TRUE if the log of the predictor varaible is to be fit. Default is TRUE}
+\item{flag.log.scale}{Default is TRUE if the log of the predictor varaible is to be fit.}
 
-\item{frac.replace}{Fraction of best chlildren to replace with best parents in each genetic algorithm iteration}
+\item{frac.replace}{Fraction of worst parents to be replaced with the best children
+in each generation}
 
 \item{Niter}{Maximum number of iterations. Default is 100}
 
 \item{mutate.rate}{Genetic algorithm mutation rate. If set to FALSE it is automatically determined. A value of 0.01 #' is suggested}
 
-\item{plot}{Set to TRUE to plot the evolution of the population of individuals over the progression of the #' algorithm}
+\item{plot.flag}{Set to TRUE to plot the evolution of the population of individuals over the progression of the #' algorithm}
 }
 \description{
-Select is used to apply the genetic algorithm to some input dataset
+\code{Select()} is used to apply the genetic algorithm to some input dataset
 outputs a list containing a list of the indiivdials in the final generation'
 of the genetic algorithm, a matrix of the fitness values of all individuals in all
 generations and the fitted model from glm for the best individual
 }
 \examples{
 baseball = read.table(file.choose(),header=TRUE)
-out <- Select(dataset=baseball, response.name="salary",userfunc=FALSE, user.family="gaussian",flag.log.scale=TRUE,Niter = 50, frac.replace = 0.2, mutate.rate = 0.01)
+out <- Select(dataset=baseball, response.name="salary", Niter = 50, mutate.rate = 0.01)
+
+\\code{\\link[GA]{AssessFitness}}
+\\code{\\link[GA]{Breed}}
+\\code{\\link[GA]{CrossOverMutate}}
+\\code{\\link[GA]{ExtractBestIndividual}}
+\\code{\\link[GA]{ExtractResponseVariable}}
+\\code{\\link[GA]{FitnessFunction}}
+\\code{\\link[GA]{ReplaceClones}}
 }
+\keyword{algorithm}
+\keyword{genetic}
+\keyword{linear}
+\keyword{optimization}
+\keyword{regression}

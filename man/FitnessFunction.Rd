@@ -2,18 +2,31 @@
 % Please edit documentation in R/FitnessFunction.R
 \name{FitnessFunction}
 \alias{FitnessFunction}
-\title{Determine the fitness of some model}
+\title{Determine the fitness of the result of a given linear model}
 \usage{
-FitnessFunction(model, userfunc = FALSE)
+FitnessFunction(model, userfunc)
 }
 \arguments{
-\item{model}{A model output from lm or glm}
+\item{model}{The object produced by the built-in R regression function \code{\link{lm}} or \code{\link{glm}}}
 
-\item{userfunc}{A fitness function that operates on a model, provided by the user. Defaults to FALSE. Built in options include "Residual" or "BIC"}
+\item{userfunc}{A fitness function that operates on a model that could be provided by the user.
+The default is the Aikake Information Criteria or "AIC".}
 }
 \description{
-Called from within GeneticAlgorithmFit
+\code{FitnessFunction()} determines the 'fitness' of a given linear fit using either a
+function supplied by the user or the Aikake Information Criteria \code{\link{extractAIC}}
+as a default.  In either case, the fitness function is designed to specifically take
+a linear regression object produced by either \code{\link{lm}} or \code{\link{glm}}.
+}
+\details{
+\emph{FitnessFunction()} returns a single scalar fitness value
+
+Called from within AssessFitness()
 }
 \examples{
-FitnessFunction()
+
+\\code{\\link[GA]{AssessFitness}}
+\\code{\\link{glm}}
+\\code{\\link{lm}}
+\\code{\\link{extractAIC}}
 }

@@ -4,12 +4,27 @@
 \alias{ExtractResponseVariable}
 \title{Extract response variable from dataframe}
 \usage{
-ExtractResponseVariable(dataset, name)
+ExtractResponseVariable(dataset, response.name)
+}
+\arguments{
+\item{dataset}{A matrix, datatable, or dataframe}
+
+\item{response.name}{The name of the column in \strong{dataset} that will act as the
+response variable to be predicted}
 }
 \description{
-This function allows the user to separate an input function
-into reponse and predictor parts
+\code{ExtractResponseVariable()} allows the user to take a data table or dataframe
+\code{dataset} and extract a 'response' vector indicated by \code{response.name}.  All
+remaining columns are collated into a matrix of co-variates or 'predictors'.
+}
+\details{
+\emph{ExtractResponseVariable()} returns the response vector and predictor matrix as a
+  two-item list.
+
+Called from within Select()
 }
 \examples{
-ExtractResponseVariable()
+
+\\code{\\link[GA]{Select}}
+
 }

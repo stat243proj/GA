@@ -2,13 +2,29 @@
 % Please edit documentation in R/CrossOverMutate.R
 \name{CrossOverMutate}
 \alias{CrossOverMutate}
-\title{Determine the fitness of some model}
+\title{Create a childe from two parents allowing for mutation}
 \usage{
-CrossOverMutate(generation, parent.index, prob.mutate)
+CrossOverMutate(generation, parent.index, prob.mutate = 0.005)
+}
+\arguments{
+\item{generation}{A list of individual genomes or co-variate sets}
+
+\item{parent.index}{A list of paired indices representig mating pairs of parents}
+
+\item{prob.mutate}{A natural rate of gene mutation determined in \code{\link{Select.R}}
+or fixed by the user.}
 }
 \description{
-This function takes a model object assesses its fitness
+\code{CrossOverMutate()} takes a \code{generation} and a list of index pairs
+(\code{parent.index}) representing two parents selected from generation to mate
+and produce 2 children.
+}
+\details{
+\emph{CrossOverMutate()} returns a two-item list of 'genomes' for each child.
+
+Called from within Breed()
 }
 \examples{
-CrossOverMutate(generation,parent.index,prob.mutate)
+
+\\code{\\link[GA]{Breed}}
 }

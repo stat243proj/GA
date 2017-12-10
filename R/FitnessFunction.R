@@ -1,35 +1,39 @@
-#' Determine the fitness of some model
+#' Determine the fitness of the result of a given linear model
 #'
-#' Called from within GeneticAlgorithmFit
-#' @param model A model output from lm or glm
-#' @param userfunc A fitness function that operates on a model, provided by the user. Defaults to FALSE. Built in options include "Residual" or "BIC"
-#' @keywords
+#' \code{FitnessFunction()} determines the 'fitness' of a given linear fit using either a
+#' function supplied by the user or the Aikake Information Criteria \code{\link{extractAIC}}
+#' as a default.  In either case, the fitness function is designed to specifically take
+#' a linear regression object produced by either \code{\link{lm}} or \code{\link{glm}}.
+#'
+#' \emph{FitnessFunction()} returns a single scalar fitness value
+#'
+#' Called from within AssessFitness()
+#'
+#' @param model The object produced by the built-in R regression function \code{\link{lm}} or \code{\link{glm}}
+#' @inheritParams Select
 #' @export
 #' @examples
-#' FitnessFunction()
+#'
+#' \code{\link[GA]{AssessFitness}}
+#' \code{\link{glm}}
+#' \code{\link{lm}}
+#' \code{\link{extractAIC}}
 
+FitnessFunction <- function(model, userfunc){
 
-# FitnessFunction
-#Evaluate the fitness of some model, output from lm or glm
-#The userfunc should take a fitted model and output a scalar
-#fitness value
+  if (userfunc == "AIC") { # default case of Aikake Info Criteria
 
-FitnessFunction <- function(model, userfunc=FALSE){
-
-  if (userfunc == FALSE) {
     fitness.value <- extractAIC(model)[2]
-  }
+    return(fitness.value)
 
-  else if (userfunc == "Residual"){
-    fitness.value <- sum(model$residuals^2)
-  }
+  } else {
+    if (class(userfunc) == "function") { # test if submitted function is a function object
 
-  else if(userfunc == "BIC"){
-    fitness.value <- BIC(model)
+      userfunc(model)
+      return(fitness.value)
+
+    } else {
+      print(paste0("WARNING: ", deparse(substitute(unserfunc)), "() is not a recognized function"))
+    }
   }
-  else{
-    print(paste("WARNING: User Fitness Function ", userfunc, " cannot be calculated", sep=''))
-    fitness.value = NULL
-  }
-  return(fitness.value)
 }

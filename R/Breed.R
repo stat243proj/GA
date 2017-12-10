@@ -1,28 +1,34 @@
-#' Determine the fitness of some model
+#' Create an ensemble of 'children' from a given generation of parents
 #'
-#' This function takes a model object assesses its fitness
-#' @param model A model output from lm or glm
-#' @param userfunc A fitness function that operates on a model, provided by the user. Defaults to FALSE. Built in options include "Residual" or "BIC"
-#' @keywords
+#' \code{Breed()} takes a \code{generation} and its associated fitness data
+#'   in \code{fitness.vec} as input and produces a number of children equal to the number
+#'   of parents in \code{generation}.  This function allows for a natural rate of
+#'   genetic mutation as set by \code{prob.mutate}.
+#'
+#' \emph{Breed()} returns a list of 'genomes' for each child.
+#'
+#' Called from within Select()
+#'
+#' @param generation A list of individual genomes or co-variate sets
+#' @param fitness.vec A vector of the fitness values for the input \code{generation}
+#' @param prob.mutate A natural rate of gene mutation determined in \code{\link{Select.R}}
+#'   or fixed by the user.
 #' @export
 #' @examples
-#' Breed()
+#'
+#' \code{\link[GA]{CrossOverMutate}}
 
+Breed <- function(generation, fitness.vec, prob.mutate) {
 
-  # Breed
-  # Function that breeds P new children based on parents' genome and fitness
+  # generation is a list with each element containing the genome of an individual
+  # fitness.vec is a vector
+  prob.reproduction <- 2*rank(-fitness.vec)/(P*(P+1))
+  parent.index.list <- lapply(1:P, function(x) sample(P,2,prob = prob.reproduction,replace=FALSE))
 
-  Breed <- function(generation, fitness.vec, predictors, prob.mutate) {
+  child.pairs <- lapply(parent.index.list, function(x) CrossOverMutate(generation, x, prob.mutate))
+  # collate list of P child pairs into a single generation (list) of P children
+  children <- unlist(child.pairs, recursive = FALSE)[1:P/2]
+  # children <- lapply(child.pairs, function(x) x[[1]])
 
-    # generation is a list with each element containing the genome of an individual
-    # fitness.vec is a vector
-    prob.reproduction <- 2*rank(-fitness.vec)/(P*(P+1))
-    parent.index.list <- lapply(1:(P/2), function(x) sample(P,2,prob = prob.reproduction,replace=FALSE))
-
-    children <- lapply(parent.index.list, function(x) CrossOverMutate(generation, x, prob.mutate))
-
-    # return P children to be considered for selection
-    # also return fitness evaluation
-
-    return(children)
-  }
+  return(children)
+}

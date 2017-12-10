@@ -2,18 +2,30 @@
 % Please edit documentation in R/Breed.R
 \name{Breed}
 \alias{Breed}
-\title{Determine the fitness of some model}
+\title{Create an ensemble of 'children' from a given generation of parents}
 \usage{
-Breed(generation, fitness.vec, predictors, prob.mutate)
+Breed(generation, fitness.vec, prob.mutate)
 }
 \arguments{
-\item{model}{A model output from lm or glm}
+\item{generation}{A list of individual genomes or co-variate sets}
 
-\item{userfunc}{A fitness function that operates on a model, provided by the user. Defaults to FALSE. Built in options include "Residual" or "BIC"}
+\item{fitness.vec}{A vector of the fitness values for the input \code{generation}}
+
+\item{prob.mutate}{A natural rate of gene mutation determined in \code{\link{Select.R}}
+or fixed by the user.}
 }
 \description{
-This function takes a model object assesses its fitness
+\code{Breed()} takes a \code{generation} and its associated fitness data
+  in \code{fitness.vec} as input and produces a number of children equal to the number
+  of parents in \code{generation}.  This function allows for a natural rate of
+  genetic mutation as set by \code{prob.mutate}.
+}
+\details{
+\emph{Breed()} returns a list of 'genomes' for each child.
+
+Called from within Select()
 }
 \examples{
-Breed()
+
+\\code{\\link[GA]{CrossOverMutate}}
 }

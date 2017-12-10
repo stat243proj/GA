@@ -2,17 +2,39 @@
 % Please edit documentation in R/AssessFitness.R
 \name{AssessFitness}
 \alias{AssessFitness}
-\title{Determine the fitness of some model}
+\title{Quantify the 'fitness' of a given linear model}
 \usage{
-AssessFitness(individual, response, user.family = "gaussian", predictors,
-  userfunc = FALSE)
+AssessFitness(individual, response, predictors, user.family = "gaussian",
+  userfunc = "AIC")
 }
 \arguments{
-\item{userfunc}{A fitness function that operates on a model, provided by the user. Defaults to FALSE. Built in options include "Residual" or "BIC"}
+\item{individual}{A binary vector of length C = # of potential co-variates in an individual.
+Co-variates to be used in the regression of \code{response} versus \code{predictors} are
+indicated by ones while the co-variates that are exlcuded are indicated by zeros.}
+
+\item{response}{The vector of response data (Y)}
+
+\item{predictors}{A data table or data frame of the co-variates (X)}
+
+\item{user.family}{Model family name to be passed to glm. Default is "gaussian"}
+
+\item{userfunc}{A fitness function that operates on a model that could be provided by the user.
+The default is the Aikake Information Criteria or "AIC".}
 }
 \description{
-Called from within GeneticAlgorithmFit
+\code{AssessFitness()} determines 'fitness' of an invidivudal based on the quality
+of least squares fit of . The default for determining fitness is the Aikake Criteria Index
+but the user can supply their own custom-made fitness function that takes a linear
+model output object as its input.
+}
+\details{
+\emph{AssessFitness()} returns a single fitness value.
+
+Called from within Select()
 }
 \examples{
-AssessFitness()
+
+\\code{\\link[GA]{FitnessFunction}}
+\\code{\\link{glm}}
+\\code{\\link{extractAIC}}
 }

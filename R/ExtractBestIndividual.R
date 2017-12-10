@@ -1,30 +1,36 @@
-#' Determine the fitness of some model
+#' Indentify the individual with the best fitness in a given generation
 #'
-#' Called from within GeneticAlgorithmFit
-#' @param generation
-#' @param fitnessmatrix
-#' @keywords
+#' \code{ExtractBestIndividual()}
+#' \emph{ExtractBestIndividual()} identifies the most fit individual within a
+#' \code{generation} and returns linear regression object produced by either
+#' \code{\link{lm}} or \code{\link{glm}}.  It also prints a summary of the linear
+#' regression object and the fitness value if prompted by the user.
+#'
+#' Called from within Select()
+#'
+#' @inheritParams Breed
+#' @param plot.flat A binary flag (0/1) which indicates whether to print a summary of the fitness
+#'   of the best individual
 #' @export
 #' @examples
-#' ExtractBestIndividual(generation,fitnessmatrix)
+#'
+#' \code{\link[GA]{Select}}
+#' \code{\link{glm}}
+#' \code{\link{lm}}
 
-
-# -------------------------------------------------------------------
-# ExtractBestIndividual
-# Function that extracts the best individual and its corresponding fitness, and prints a set of
-# summary statistics
-ExtractBestIndividual <- function(generation, fitnessmatrix){
+ExtractBestIndividual <- function(generation, fitness.vec, plot.flag=FALSE){
 
   #Extract the best individual and its corresponding fitness, and print a set of
   #summary statistics
 
-  best.index <- order(fitnessmatrix[,Niter])[1]
+  best.index <- order(fitness.vec)[1]
 
   best.individual <- generation[[best.index]]
-  print(best.individual)
   predictors.individual <- predictors[,best.individual==1]
   best.model <- lm(response[,1]~., predictors.individual)
-  print(summary(best.model))
-  print(best.individual)
+  if (plot.flag == TRUE) {
+    print(summary(best.model))
+    print(best.individual)
+  }
   return(best.model)
 }

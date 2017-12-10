@@ -2,13 +2,31 @@
 % Please edit documentation in R/ExtractBestIndividual.R
 \name{ExtractBestIndividual}
 \alias{ExtractBestIndividual}
-\title{Determine the fitness of some model}
+\title{Indentify the individual with the best fitness in a given generation}
 \usage{
-ExtractBestIndividual(generation, fitnessmatrix)
+ExtractBestIndividual(generation, fitness.vec, plot.flag = FALSE)
+}
+\arguments{
+\item{generation}{A list of individual genomes or co-variate sets}
+
+\item{fitness.vec}{A vector of the fitness values for the input \code{generation}}
+
+\item{plot.flat}{A binary flag (0/1) which indicates whether to print a summary of the fitness
+of the best individual}
 }
 \description{
-Called from within GeneticAlgorithmFit
+\code{ExtractBestIndividual()}
+\emph{ExtractBestIndividual()} identifies the most fit individual within a
+\code{generation} and returns linear regression object produced by either
+\code{\link{lm}} or \code{\link{glm}}.  It also prints a summary of the linear
+regression object and the fitness value if prompted by the user.
+}
+\details{
+Called from within Select()
 }
 \examples{
-ExtractBestIndividual(generation,fitnessmatrix)
+
+\\code{\\link[GA]{Select}}
+\\code{\\link{glm}}
+\\code{\\link{lm}}
 }

@@ -1,25 +1,39 @@
-#' Apply genetic algorithm
+#' Apply a genetic algorithm to find the optimal co-variates in a linear regression
 #'
-#' Select is used to apply the genetic algorithm to some input dataset
+#' \code{Select()} is used to apply the genetic algorithm to some input dataset
 #' outputs a list containing a list of the indiivdials in the final generation'
 #' of the genetic algorithm, a matrix of the fitness values of all individuals in all
 #' generations and the fitted model from glm for the best individual
-#' @param dataset A dataframe
-#' @param response.name The name of the response variable to be predicted, e.g. "salary"
+#'
+#' @param dataset A matrix, datatable, or dataframe
+#' @param response.name The name of the column in \strong{dataset} that will act as the
+#'   response variable to be predicted
+#' @param userfunc A fitness function that operates on a model that could be provided by the user.
+#'   The default is the Aikake Information Criteria or "AIC".
 #' @param user.family Model family name to be passed to glm. Default is "gaussian"
-#' @param flag.log.scale TRUE if the log of the predictor varaible is to be fit. Default is TRUE
-#' @param frac.replace Fraction of best chlildren to replace with best parents in each genetic algorithm iteration
+#' @param flag.log.scale Default is TRUE if the log of the predictor varaible is to be fit.
+#' @param frac.replace Fraction of worst parents to be replaced with the best children
+#'   in each generation
 #' @param Niter Maximum number of iterations. Default is 100
 #' @param mutate.rate Genetic algorithm mutation rate. If set to FALSE it is automatically determined. A value of 0.01 #' is suggested
-#' @param plot Set to TRUE to plot the evolution of the population of individuals over the progression of the #' algorithm
-#' @param userfunc A fitness function that operates on a model, provided by the user. Defaults to FALSE. Built in #' options include "Residual" or "BIC"
-#' @keywords
+#' @param plot.flag Set to TRUE to plot the evolution of the population of individuals over the progression of the #' algorithm
+#'
+#' @keywords linear regression optimization genetic algorithm
 #' @export
 #' @examples
 #' baseball = read.table(file.choose(),header=TRUE)
-#' out <- Select(dataset=baseball, response.name="salary",userfunc=FALSE, user.family="gaussian",flag.log.scale=TRUE,Niter = 50, frac.replace = 0.2, mutate.rate = 0.01)
+#' out <- Select(dataset=baseball, response.name="salary", Niter = 50, mutate.rate = 0.01)
+#'
+#' \code{\link[GA]{AssessFitness}}
+#' \code{\link[GA]{Breed}}
+#' \code{\link[GA]{CrossOverMutate}}
+#' \code{\link[GA]{ExtractBestIndividual}}
+#' \code{\link[GA]{ExtractResponseVariable}}
+#' \code{\link[GA]{FitnessFunction}}
+#' \code{\link[GA]{ReplaceClones}}
 
-Select <- function(dataset, response.name, userfunc=FALSE, user.family="gaussian", flag.log.scale=TRUE, frac.replace=0.2, Niter=100, mutate.rate=FALSE, plot=TRUE){
+Select <- function(dataset, response.name, userfunc="AIC", user.family="gaussian", flag.log.scale=TRUE,
+                   frac.replace=0.2, Niter=100, mutate.rate=FALSE, plot.flag=TRUE){
 
   #User can define a fitness function, log scale flag, fraction of children to replace with parents, number of iterations and a mutation rate. If these are not provided they are set to dafault
 
@@ -40,7 +54,8 @@ Select <- function(dataset, response.name, userfunc=FALSE, user.family="gaussian
 
   C <- length(predictors) #Get the number of predictors (GLOBAL)
   Niter <<- Niter #number of iterations
-  P <<- as.integer(C*1.5) #number of individuals in a given generation (GLOBAL)
+  P <- as.integer(C*1.5) #number of individuals in a given generation (GLOBAL)
+  P <<- 2*ceiling(P/2) # Force P to be even due to a future need to 'split' a generation in two
 
   #Set the mutation rate
   if (mutate.rate == FALSE) {
@@ -69,25 +84,12 @@ Select <- function(dataset, response.name, userfunc=FALSE, user.family="gaussian
     # breed selection of P children and assess their fitness
     children <- Breed(generation.old, fitness[,n], predictors, prob.mutate)
 
-    #Now, children is a list of length 20, and each element in the list is a data frame
-    #containing two columns. Each columns is a child.
-
-    #The following two lines are just converting children into a list of length 40.
-    #And, each element in the list is a child.
-    children <- cbind(sapply(children,"[[", 1), sapply(children,"[[", 2))
-    children <- lapply(seq_len(ncol(children)), function(i) children[,i])
-
-    #Reason why we convert varaiable children into a list of length 40 is that we want
-    #to make sure data structure of children is the same as before, so variable children
-    #is able to be applied in every function.
-
     children.fitness <- sapply(children, AssessFitness, response = response, user.family, predictors = predictors, userfunc)
-
     number.children.keep <- round((1-frac.replace)*P)
     number.parents.keep <- P - number.children.keep
 
-    #If we do want to keep parents in the new generation, then figure out the parents that we want to
-    #keep. Otherwise, just replace all the parents with the children.
+    # If we do want to keep parents in the new generation, then figure out the parents that we want to
+    # keep. Otherwise, just replace all the parents with the children.
     if (number.parents.keep > 1){
 
       parents.fitness <- sapply(generation.old, AssessFitness, response = response, user.family, predictors = predictors, userfunc)
@@ -118,26 +120,27 @@ Select <- function(dataset, response.name, userfunc=FALSE, user.family="gaussian
     #generation.old.worst.index <- which(rank(-fitness[,n])<=round(frac.replace*P)) # select worst parent by rank
     generation.old <- generation.new # keep most of prior generation
     fitness[,n+1] <- generation.new.fitness # keep most of prior generation fitness data
-    print(min(generation.new.fitness))
 
   }
   stop <- Sys.time()
 
-  best.model <- ExtractBestIndividual(generation.old,fitness)
+  best.model <- ExtractBestIndividual(generation.new, generation.new.fitness, plot.flag)
+
 
   #If user wants to plot the evolution of the population over time, do so
 
-  if (plot == TRUE) {
+  if (plot.flag == TRUE) {
 
-    plot(-fitness,xlim=c(0,Niter),ylim=c(min(-fitness), max(-fitness)),type="n",ylab="Negative fitness value",
+    print(min(generation.new.fitness))
+    plot(-fitness,xlim=c(0,Niter),ylim=c(min(fitness), max(fitness)),type="n",ylab="Negative fitness value",
          xlab="Generation",main="Fitness values For Genetic Algorithm")
     for(i in 1:Niter){points(rep(i,P),-fitness[,i],pch=20)}
   }
 
 
   # show run time
-  cat("Algorithm runtime: ", round(as.numeric(stop-start),2), " seconds")
-  print(stop-start)
+  cat("Algorithm runtime: ", round(as.numeric(stop-start),2), " seconds\n")
+  # print(stop-start)
 
   # RETURN OUTPUT VARIABLES
   output <- list("LastGen" = generation.new, "fitness" = fitness, "bestModel" = best.model)

@@ -2,13 +2,33 @@
 % Please edit documentation in R/ReplaceClones.R
 \name{ReplaceClones}
 \alias{ReplaceClones}
-\title{Determine the fitness of some model}
+\title{Remove genetic clones from a given generation}
 \usage{
 ReplaceClones(generation, fitness.vec, C)
 }
+\arguments{
+\item{generation}{A list of individual genomes or co-variate sets}
+
+\item{fitness.vec}{A vector of the fitness values for the input \code{generation}}
+
+\item{C}{The number of genes (potential co-variantes) in an individual}
+}
 \description{
-Called from within GeneticAlgorithmFit
+\code{ReplaceClones()} removes any clones (genetically identical individuals) from a
+given generation and replaces them with individuals randomly created from the entire
+genome clones are predicted to exist when fitness of two individuals are exactly the
+same this is highly unlikely unless they share the same exact genome.  Once idenfitied
+clones are replaced with new individuals whoses genomes are randomly generated from a
+binomial distribution with p = 0.5.  This is done to re-inject diversity back into the
+existing gene pool.
+}
+\details{
+\emph{ReplaceClones()} produces a revised generation where all clones have been replaced
+  by random individuals as described above.
+
+Called from within Select()
 }
 \examples{
-ReplaceClones(generation,fitness.vec.C)
+
+\\code{\\link[GA]{Select}}
 }

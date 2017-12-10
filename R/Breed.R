@@ -27,7 +27,7 @@ Breed <- function(generation, fitness.vec, prob.mutate) {
 
   child.pairs <- lapply(parent.index.list, function(x) CrossOverMutate(generation, x, prob.mutate))
   # collate list of P child pairs into a single generation (list) of P children
-  children <- unlist(child.pairs, recursive = FALSE)[1:P/2]
+  children <- unlist(child.pairs, recursive = FALSE)[1:P]
   # children <- lapply(child.pairs, function(x) x[[1]])
 
   return(children)

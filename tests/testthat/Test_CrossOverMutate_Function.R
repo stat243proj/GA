@@ -14,6 +14,12 @@ test_that("Check the value of return value from CrossOverMutate function with a 
                                  c(1,2), 0.004811252)[[1]], 
     c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
   })
+
+test_that("Check the value of return value from CrossOverMutate function with an NA list is correct",{
+  expect_equal(CrossOverMutate(lapply(1:40, function(x) {rep(NA, times=27)}), 
+                                 c(1,2), 0.004811252)[[1]], 
+    as.numeric(c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA)))
+  })
   
   test_that("Check the dimension of return value(a child genome) from CrossOverMutate function is correct",{
     set.seed(1)

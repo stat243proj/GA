@@ -16,7 +16,7 @@ test_ReplaceClones <- function(dataset, response.name){
   #test ReplaceClones function
   test_that("Check the dimension of return generation from ReplaceClones function is P",{
     expect_equal(length(ReplaceClones(generation.old, fitness, C)$generation), P)
-    expect_equal(round(ReplaceClones(generation.old, fitness, C)$fitness[2,1]), 830)
+    expect_equal(round(ReplaceClones(generation.old, fitness, C)$fitness[2,1]), 5562)
   })
 }
 

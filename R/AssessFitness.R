@@ -28,7 +28,7 @@ AssessFitness <- function(individual, response, predictors, user.family="gaussia
   #The userfunc should take a fitted model and output a scalar fitness value
 
   #ensure that there is more than one '1' in the vector
-  while (sum(individual) <= 1){
+  while (sum(individual) == 0){
 
     insertonepos = sample(1:length(individual),1)
     individual[insertonepos] = 1

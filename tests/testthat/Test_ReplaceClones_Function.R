@@ -4,6 +4,11 @@ context("Test the dimension and value of the output of ReplaceClones function")
 test_that("Check the output of the ReplaceClones function is correct",{
     set.seed(1)
     fitness.vec <- rnorm(40, 700, 1)
+    set.seed(1)
+    generation <- lapply(1:40, function(x) {rbinom(27, 1, 0.5)})
+    expect_equal(ReplaceClones(generation, fitness.vec)$generation[[1]], 
+                 c(0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0))
+    
     expect_equal(ReplaceClones(lapply(1:40, function(x) {rep(1, times=27)}), 
                                      fitness.vec)$generation[[1]], 
                  c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1))

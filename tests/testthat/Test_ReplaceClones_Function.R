@@ -1,45 +1,23 @@
 #Test the ReplaceClones function
-context("Test the dimension and value of the output of ReplaceClones function with the baseball data")
-
+data(mtcars)
+C <- dim(mtcars)[2] - 1
+P <- as.integer(C.cars*1.5)
+P <- 2*ceiling(P.cars/2)
+prob.mutate <- 1.0/(P*sqrt(C))
+context("Test the dimension and value of the output of ReplaceClones function")
 test_that("Check the output of the ReplaceClones function is correct",{
-    set.seed(1)
-    fitness.vec <- rnorm(40, 700, 1)
-    set.seed(1)
-    generation <- lapply(1:40, function(x) {rbinom(27, 1, 0.5)})
-    expect_equal(ReplaceClones(generation, fitness.vec)$generation[[1]], 
-                 c(0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0))
-    
-    expect_equal(ReplaceClones(lapply(1:40, function(x) {rep(1, times=27)}), 
-                                     fitness.vec)$generation[[1]], 
-                 c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1))
-    
-    expect_equal(ReplaceClones(lapply(1:40, function(x) {rep(NA, times=27)}), 
-                                     fitness.vec)$generation[[1]], 
-                 c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA))
-    
-  })
+  set.seed(1)
+  subsets <- ExtractResponseVariable(mtcars, "mpg")
+  predictors <- subsets[[2]]
+  response <- subsets[[1]]
+  generation <- lapply(1:P.cars, function(x) {rbinom(C, 1, 0.5)})
+  fitness.vec <- rep(0, 16)
+  pos <- sample(1:P, 5, prob = rep(1/16, 16))
+  fitness.vec <- rnorm(P, 550, 20)
+  fitness.vec[pos] <- 500
+  expect_equal(ReplaceClones(generation, fitness.vec)$generation[[1]], 
+               c(0, 0, 1, 1, 0, 1, 1, 1, 1, 0))
+}) 
 
-  test_that("check the dimension of return generation from ReplaceClones function with the baseball data is correct",{
-    expect_length(ReplaceClones(lapply(1:40, function(x) {rep(1, times=27)}),
-                                fitness.vec)$generation, 40)
-  })
-
-test_that("Check the output of the ReplaceClones function with mtcars data is correct",{
-    set.seed(2)
-  fitness.vec <- rnorm(16, 500, 20)
-    expect_equal(ReplaceClones(lapply(1:16, function(x) {rep(1, times=10)}), 
-                                     fitness.vec)$generation[[1]], 
-                 c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1))
-    
-    expect_equal(ReplaceClones(lapply(1:16, function(x) {rep(NA, times=10)}), 
-                                     fitness.vec)$generation[[1]], 
-                 c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA))
-    
-  })
-
-test_that("check the dimension of return generation from ReplaceClones function is correct",{
-    expect_length(ReplaceClones(lapply(1:16, function(x) {rep(1, times=10)}),
-                                fitness.vec)$generation, 16)
-  })
 
 

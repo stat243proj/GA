@@ -119,7 +119,7 @@ Select <- function(dataset, response.name, userfunc="AIC", user.family="gaussian
     #generation.old.worst.index <- which(rank(-fitness[,n])<=round(frac.replace*P)) # select worst parent by rank
     generation.old <- generation.new # keep most of prior generation
     fitness[,n+1] <- generation.new.fitness # keep most of prior generation fitness data
-    print(print(paste("Best Fitness value in NO.","n ","generation: ", min(generation.new.fitness), sep='')))
+    print(print(paste("Best Fitness value in NO.",n ," generation: ", round(min(generation.new.fitness),3), sep='')))
     
   #If user wants to plot the evolution of the population over time, do so
   }

@@ -28,7 +28,6 @@ ExtractBestIndividual <- function(generation, fitness.vec){
   best.individual <- generation[[best.index]]
   predictors.individual <- predictors[,best.individual==1]
   best.model <- lm(response[,1]~., predictors.individual)
-  print(summary(best.model))
-  print(best.individual)
-  return(best.model)
+  best.fitness <- fitness.vec[best.index]
+  return(list(best.model,best.individual,best.fitness))
 }

@@ -40,13 +40,6 @@ generations and the fitted model from glm for the best individual
 baseball = read.table(file.choose(),header=TRUE)
 out <- Select(dataset=baseball, response.name="salary", Niter = 50, mutate.rate = 0.01)
 
-\\code{\\link[GA]{AssessFitness}}
-\\code{\\link[GA]{Breed}}
-\\code{\\link[GA]{CrossOverMutate}}
-\\code{\\link[GA]{ExtractBestIndividual}}
-\\code{\\link[GA]{ExtractResponseVariable}}
-\\code{\\link[GA]{FitnessFunction}}
-\\code{\\link[GA]{ReplaceClones}}
 }
 \keyword{algorithm}
 \keyword{genetic}

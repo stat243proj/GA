@@ -4,7 +4,7 @@
 \alias{ReplaceClones}
 \title{Remove genetic clones from a given generation}
 \usage{
-ReplaceClones(generation, fitness.vec, C)
+ReplaceClones(generation, fitness.vec)
 }
 \arguments{
 \item{generation}{A list of individual genomes or co-variate sets}

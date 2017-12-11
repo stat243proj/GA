@@ -24,13 +24,6 @@
 #' baseball = read.table(file.choose(),header=TRUE)
 #' out <- Select(dataset=baseball, response.name="salary", Niter = 50, mutate.rate = 0.01)
 #'
-#' \code{\link[GA]{AssessFitness}}
-#' \code{\link[GA]{Breed}}
-#' \code{\link[GA]{CrossOverMutate}}
-#' \code{\link[GA]{ExtractBestIndividual}}
-#' \code{\link[GA]{ExtractResponseVariable}}
-#' \code{\link[GA]{FitnessFunction}}
-#' \code{\link[GA]{ReplaceClones}}
 
 Select <- function(dataset, response.name, userfunc="AIC", user.family="gaussian", flag.log.scale=TRUE,
                    frac.replace=0.2, Niter=100, mutate.rate=FALSE, plot.flag=TRUE){
@@ -53,8 +46,8 @@ Select <- function(dataset, response.name, userfunc="AIC", user.family="gaussian
   # These variables are accessible to all genalg functions
 
   Ncovar <- length(predictors) #Get the number of predictors (GLOBAL)
-  P <- as.integer(Ncovar*1.5) #number of individuals in a given generation (GLOBAL)
-  P <- 2*ceiling(P/2) # Force P to be even due to a future need to 'split' a generation in two
+  P <- 2*ceiling(as.integer(Ncovar*1.5)/2) #number of individuals in a given generation (GLOBAL)
+  # Force P to be even due to a future need to 'split' a generation in two
 
   #Set the mutation rate
   if (mutate.rate == FALSE) {
@@ -76,7 +69,7 @@ Select <- function(dataset, response.name, userfunc="AIC", user.family="gaussian
   # MAIN LOOP for genetic algorithm
   # Loop through generations and apply selective forces to create iterative generations
 
-  start <- Sys.time()
+  starttime <- Sys.time()
 
   for (n in 1:(Niter-1)) { #Niter -1 because we've already made the first generation
 
@@ -116,34 +109,33 @@ Select <- function(dataset, response.name, userfunc="AIC", user.family="gaussian
     generation.new <- clones.removed$generation
     generation.new.fitness <- clones.removed$fitness
 
+    bestmodellist <- ExtractBestIndividual(generation.new, generation.new.fitness)
+    best.model <- bestmodellist[[1]]
+    best.individual <- bestmodellist[[2]]
+    best.fitness <- bestmodellist[[3]]
+
     #generation.old.worst.index <- which(rank(-fitness[,n])<=round(frac.replace*P)) # select worst parent by rank
     generation.old <- generation.new # keep most of prior generation
     fitness[,n+1] <- generation.new.fitness # keep most of prior generation fitness data
-    print(paste("Best Fitness value in NO.",n ," generation: ", round(min(generation.new.fitness),3), sep=''))
-    
+    print(paste("Best Fitness value in generation. :",n," ",round(best.fitness,3), sep=''))
+
   #If user wants to plot the evolution of the population over time, do so
   }
   if (plot.flag) {
-    plot(-fitness,xlim=c(0,Niter),ylim=c(min(-fitness), max(-fitness)), type="n", 
+    plot(-fitness,xlim=c(0,Niter),ylim=c(min(-fitness), max(-fitness)), type="n",
          ylab="Negative fitness values", xlab="Iteration", main="Fitness values For Genetic Algorithm")
     for(i in 1:Niter){
       points(rep(i,P), -fitness[,i], pch=20)
     }
   }
-    
-  stop <- Sys.time()
 
-  best.model <- ExtractBestIndividual(generation.new, generation.new.fitness)
-
-
-
+  stoptime <- Sys.time()
 
   # show run time
-  cat("Algorithm runtime: ", round(as.numeric(stop-start),2), " seconds\n")
-  # print(stop-start)
+  cat("Algorithm runtime: ", round(as.numeric(stoptime-starttime),2), " seconds\n")
 
   # RETURN OUTPUT VARIABLES
-  output <- list("LastGen" = generation.new, "fitness" = fitness, "bestModel" = best.model)
+  output <- list("LastGen" = generation.new, "fitness" = fitness, "bestModel" = best.model, "bestIndividual" = best.individual, "bestFitness" = best.fitness)
   return(output)
 
 }

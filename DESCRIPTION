@@ -2,9 +2,9 @@ Package: GA
 Type: Genetic Algorithm Package for STAT243 class
 Title: Appllies a modified genetic algorithm to some dataset, in order to assess what combination of predictor variables are best able to predict
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: This is what it does
+Author: Jim Falter, Echo Wang, Shan Gao, Kevin Fei, Robert Martin-Short
+Maintainer: The package maintainer: <martinshortr@gmail.com>
+Description: GA program for STAT243
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true

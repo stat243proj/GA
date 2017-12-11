@@ -4,7 +4,7 @@
 \alias{ExtractBestIndividual}
 \title{Indentify the individual with the best fitness in a given generation}
 \usage{
-ExtractBestIndividual(generation, fitness.vec, plot.flag = FALSE)
+ExtractBestIndividual(generation, fitness.vec)
 }
 \arguments{
 \item{generation}{A list of individual genomes or co-variate sets}

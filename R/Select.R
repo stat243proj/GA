@@ -124,15 +124,14 @@ Select <- function(dataset, response.name, userfunc="AIC", user.family="gaussian
     
   #If user wants to plot the evolution of the population over time, do so
 
-    if (plot.flag == TRUE) {
-
-
-    plot(-fitness,xlim=c(0,Niter),ylim=c(min(-fitness), max(-fitness)),type="n",ylab="Negative fitness value",
-         xlab="Generation",main="Fitness values For Genetic Algorithm")
-    for(i in 1:Niter){points(rep(i,P),-fitness[,i],pch=20)
-                     }
+  if (plot.flag) {
+    plot(-fitness,xlim=c(0,Niter),ylim=c(min(-fitness), max(-fitness)), type="n", 
+         ylab="Negative fitness value", xlab="Generation", main="Fitness values For Genetic Algorithm")
+    for(i in 1:Niter){
+      points(rep(i,P), -fitness[,i], pch=20)
     }
   }
+    
   stop <- Sys.time()
 
   best.model <- ExtractBestIndividual(generation.new, generation.new.fitness)

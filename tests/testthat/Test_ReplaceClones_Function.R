@@ -16,7 +16,7 @@ test_that("Check the output of the ReplaceClones function is correct",{
 
   test_that("check the dimension of return generation from ReplaceClones function is correct",{
     expect_length(ReplaceClones(lapply(1:40, function(x) {rep(1, times=27)}),
-                                rnorm(40, 700, 1))$generation, 40)
+                                fitness.vec)$generation, 40)
   })
 
 test_that("Check the output of the ReplaceClones function with mtcars data is correct",{

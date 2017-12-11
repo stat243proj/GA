@@ -30,7 +30,6 @@ ReplaceClones <- function(generation, fitness.vec) {
   generation[clone.index] <- replacements
   # the followin is to avoid computing fitness for the majority of non-clones
   fitness.replacements <- sapply(replacements, AssessFitness, response = response, predictors = predictors)
-  dim(fitness.replacements)
   fitness.vec[clone.index] <- fitness.replacements
   output <- list("generation" = generation, "fitness" = fitness.vec)
   return(output)

@@ -19,3 +19,9 @@ test_that("Check the output of the Select function with mtcars data is correct",
                  c(1, 0, 1, 0, 1, 0, 0, 0, 0, 0))
   })
 
+test_that("Check the dimension of fitness matrix of the Select function with mtcars data", {
+  set.seed(8)
+  result <- Select(dataset=cars, response.name="mpg", user.family="gaussian", flag.log.scale=TRUE, Niter = 50, frac.replace = 0.2, mutate.rate = FALSE)
+  expect_equal(dim(result$fitness)[1], 16)
+  expect_equal(dim(result$fitness)[2], 50)
+})

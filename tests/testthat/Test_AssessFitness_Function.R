@@ -1,14 +1,14 @@
-#Test the AssessFitness function
-
-context("Test the return value of AssessFitness function")
-
-test_that("Check the return value of AssessFitness function with baseball data",{
-  expect_equal(round(AssessFitness(rep(1, times=27),baseball.dat["salary"], baseball.dat, 
-                               user.family = "gaussian", userfunc = "AIC")), -18653)
-  })
-
-test_that("Check the return value of AssessFitness function with mtcars data",{
+#Test the ExtractResponseVariable function
+data(mtcars)
+C <- dim(mtcars)[2] - 1
+P <- as.integer(C.cars*1.5)
+P <- 2*ceiling(P.cars/2)
+prob.mutate <- 1.0/(P*sqrt(C))
+context("Test the output of ExtractResponseVariable")
+test_that("Check the length of dataset mtcars response variables is 32, 
+            and the first and third elements of salary are 21.0 and 22.8",{
   data(mtcars)
-  expect_equal(round(AssessFitness(rep(1, times=10), mtcars["mpg"], mtcars, 
-                               user.family = "gaussian", userfunc = "AIC")), -2036)
-  })
+  expect_equal(length(unlist(ExtractResponseVariable(mtcars, "mpg")[[1]])), 32)
+  expect_equal(as.numeric((unlist(ExtractResponseVariable(mtcars, "mpg")[[1]]))[1]), 21.0)
+  expect_equal(as.numeric((unlist(ExtractResponseVariable(mtcars, "mpg")[[1]]))[3]), 22.8)
+})

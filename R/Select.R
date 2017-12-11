@@ -125,7 +125,7 @@ Select <- function(dataset, response.name, userfunc="AIC", user.family="gaussian
   }
   if (plot.flag) {
     plot(-fitness,xlim=c(0,Niter),ylim=c(min(-fitness), max(-fitness)), type="n", 
-         ylab="Negative fitness value", xlab="Generation", main="Fitness values For Genetic Algorithm")
+         ylab="Negative fitness values", xlab="Iteration", main="Fitness values For Genetic Algorithm")
     for(i in 1:Niter){
       points(rep(i,P), -fitness[,i], pch=20)
     }

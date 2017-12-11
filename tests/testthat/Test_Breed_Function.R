@@ -24,5 +24,5 @@ test_that("With the baseball data, check the dimension and length of return list
               expect_length(Breed(generation, fitness.vec, 0.004811252), 40)
               expect_equal(unique(unlist(
                 lapply(Breed(generation, fitness.vec, 0.004811252),function(x) length(unlist(x))
-                ))), 27)
+                ))), 10)
 })

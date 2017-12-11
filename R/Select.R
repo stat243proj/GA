@@ -123,7 +123,7 @@ Select <- function(dataset, response.name, userfunc="AIC", user.family="gaussian
     print(min(generation.new.fitness))
     
   #If user wants to plot the evolution of the population over time, do so
-
+  }
   if (plot.flag) {
     plot(-fitness,xlim=c(0,Niter),ylim=c(min(-fitness), max(-fitness)), type="n", 
          ylab="Negative fitness value", xlab="Generation", main="Fitness values For Genetic Algorithm")

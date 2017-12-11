@@ -1,5 +1,5 @@
 #Test the ReplaceClones function
-context("Test the dimension and value of the output of ReplaceClones function")
+context("Test the dimension and value of the output of ReplaceClones function with the baseball data")
 
 test_that("Check the output of the ReplaceClones function is correct",{
     set.seed(1)
@@ -19,7 +19,7 @@ test_that("Check the output of the ReplaceClones function is correct",{
     
   })
 
-  test_that("check the dimension of return generation from ReplaceClones function is correct",{
+  test_that("check the dimension of return generation from ReplaceClones function with the baseball data is correct",{
     expect_length(ReplaceClones(lapply(1:40, function(x) {rep(1, times=27)}),
                                 fitness.vec)$generation, 40)
   })

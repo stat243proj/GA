@@ -1,8 +1,8 @@
 #Test the FitnessFunction
 data(mtcars)
 C <- dim(mtcars)[2] - 1
-P <- as.integer(C.cars*1.5)
-P <- 2*ceiling(P.cars/2)
+P <- as.integer(C*1.5)
+P <- 2*ceiling(P/2)
 prob.mutate <- 1.0/(P*sqrt(C))
 context("Test the output of FitnessFunction")
 test_that("Check the return fitness value from FitnessFunction is 163",{

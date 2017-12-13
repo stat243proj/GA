@@ -8,8 +8,8 @@ context("Test the dimension and value of the output of ReplaceClones function")
 test_that("Check the output of the ReplaceClones function is correct",{
   set.seed(1)
   subsets <- ExtractResponseVariable(mtcars, "mpg")
-  predictors <- subsets[[2]]
-  response <- subsets[[1]]
+  predictors <<- subsets[[2]]
+  response <<- subsets[[1]]
   generation <- lapply(1:P, function(x) {rbinom(C, 1, 0.5)})
   fitness.vec <- rep(0, 16)
   pos <- sample(1:P, 5, prob = rep(1/16, 16))

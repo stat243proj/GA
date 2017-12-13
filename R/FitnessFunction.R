@@ -18,22 +18,22 @@
 #' \code{\link{glm}}
 #' \code{\link{lm}}
 #' \code{\link{extractAIC}}
-
 FitnessFunction <- function(model, userfunc){
-
-  if (userfunc == "AIC") { # default case of Aikake Info Criteria
-
+  
+  if ((class(userfunc) == "character")&&(userfunc == "AIC")) { # default case of Aikake Info Criteria
+    
     fitness.value <- extractAIC(model)[2]
     return(fitness.value)
-
-  } else {
-    if (class(userfunc) == "function") { # test if submitted function is a function object
-
-      fitness.value <- userfunc(model)
+    
+  } 
+  
+  if (class(userfunc) == "function") { # test if submitted function is a function object
+      
+      fitness.value = userfunc(model)
       return(fitness.value)
-
-    } else {
+      
+    } 
+  else {
       print(paste0("WARNING: ", deparse(substitute(unserfunc)), "() is not a recognized function"))
     }
   }
-}

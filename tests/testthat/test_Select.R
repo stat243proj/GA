@@ -1,10 +1,9 @@
 #Test the Select function
 context("Test the type of return value of Selection function")
-
+set.seed(7)
 #test Select function
 #test Select function with baseball data
  test_that("Check the output of the Select function with baseball data is correct",{
-  set.seed(7)
    baseball.dataset <- paste(path.package("GA")[[1]],'/tests/baseball.dat',sep='')
    baseball.dat = read.table(baseball.dataset,header=TRUE)
    Niter <- 50
@@ -16,6 +15,7 @@ context("Test the type of return value of Selection function")
    expect_lt(output$bestFitness,541.0)
   })
 
+set.seed(7)
 test_that("Check the dimension of fitness matrix of the Select function with baseball data", {
   baseball.dataset <- paste(path.package("GA")[[1]],'/tests/baseball.dat',sep='')
   baseball.dat = read.table(baseball.dataset,header=TRUE)

@@ -29,7 +29,7 @@ FitnessFunction <- function(model, userfunc){
   } else {
     if (class(userfunc) == "function") { # test if submitted function is a function object
 
-      userfunc(model)
+      fitness.value <- userfunc(model)
       return(fitness.value)
 
     } else {

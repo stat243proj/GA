@@ -9,7 +9,7 @@ context("Test the type of return value of Selection function")
    baseball.dat = read.table(baseball.dataset,header=TRUE)
    Niter <- 50
   output <- Select(baseball.dat, "salary", userfunc="AIC", user.family="gaussian", flag.log.scale=TRUE,
-                   frac.replace=0.2, Niter=Niter, mutate.rate=FALSE, plot.flag=TRUE)
+                   frac.replace=0.2, Niter=Niter, mutate.rate=FALSE, plot.flag=FALSE)
 
    #shouldn't we be looking at the sum of the absolute values of the residuals?
    expect_lt(sum(output$bestModel$residuals), 1e-14)

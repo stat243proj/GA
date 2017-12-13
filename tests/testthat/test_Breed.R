@@ -10,5 +10,5 @@ test_that("With the baseball data, check the output of the Breed function is cor
   generation <- lapply(1:P, function(x) {rbinom(C, 1, 0.5)})
   fitness.vec <- rnorm(P, 160, 10)
   expect_equal(Breed(generation, fitness.vec, prob.mutate)[[1]],
-               c(1, 1, 0, 0, 1, 1, 1, 0, 1, 1))
+               c(0, 0, 0, 1, 1, 1, 1, 1, 0, 0))
 })

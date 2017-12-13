@@ -16,7 +16,7 @@ test_that("Check the output of the ReplaceClones function is correct",{
   fitness.vec <- rnorm(P, 550, 20)
   fitness.vec[pos] <- 500
   expect_equal(ReplaceClones(generation, fitness.vec)$generation[[1]],
-               c(0, 0, 1, 1, 0, 1, 1, 1, 1, 0))
+               c(0, 1, 1, 0, 1, 1, 0, 1, 1, 1))
 })
 
 

@@ -21,7 +21,7 @@ test_that("Check the dimension of fitness matrix of the Select function with bas
   baseball.dat = read.table(baseball.dataset,header=TRUE)
   Niter <- 50
   output <- Select(baseball.dat, "salary", userfunc="AIC", user.family="gaussian", flag.log.scale=TRUE,
-                   frac.replace=0.2, Niter=Niter, mutate.rate=FALSE, plot.flag=TRUE)
+                   frac.replace=0.2, Niter=Niter, mutate.rate=FALSE, plot.flag=FALSE)
   expect_equal(dim(output$fitness)[1], 40)
   expect_equal(dim(output$fitness)[2], Niter)
 })

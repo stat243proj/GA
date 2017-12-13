@@ -9,5 +9,5 @@ test_that("Check the return value of AssessFitness function with mtcars data",{
   set.seed(1)
   individual <- rbinom(10, 1, 0.5)
   expect_equal(floor(AssessFitness(individual, mtcars["mpg"], mtcars,
-                user.family = "gaussian", userfunc = "AIC")), 156)
+                user.family = "gaussian", userfunc = "AIC")), 164)
 })

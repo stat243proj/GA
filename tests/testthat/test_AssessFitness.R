@@ -8,5 +8,5 @@ context("Test the return value of AssessFitness function")
 test_that("Check the return value of AssessFitness function with mtcars data",{
   individual <- c(0,1,0,1,0,0,1,0,1,1)
   expect_equal(floor(AssessFitness(individual, mtcars["mpg"], mtcars,
-                user.family = "gaussian", userfunc = "AIC")), 166)
+                user.family = "gaussian", userfunc = "AIC")), 156)
 })

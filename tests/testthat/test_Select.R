@@ -11,7 +11,10 @@ set.seed(7)
                    frac.replace=0.2, Niter=Niter, Nruns = 1, mutate.rate=FALSE, plot.flag=FALSE)
 
    #shouldn't we be looking at the sum of the absolute values of the residuals?
-   expect_lt(sum(output$BestModel$residuals), 1e-14)
+   
+   #Change the way of accessing sum of residuals, because I think output$BestModel is a list containing one element
+   expect_lt(sum(output$BestModel[[1]]$residuals), 1e-14)
+   #expect_lt(sum(output$BestModel$residuals), 1e-14)
    expect_lt(output$BestFitness,541.0)
   })
 

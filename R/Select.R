@@ -153,13 +153,13 @@ Select <- function(dataset, response.name, userfunc=NA, user.family="gaussian", 
     Last.Gen[[j]] <- generation.new
     Fitness[[j]] <- fitness
     Best.Model[[j]] <- best.model
-    print(summary(BestModel[[j]]))
     Best.Fitness[j] <- best.fitness
 
     # show run time
     stop.time <- Sys.time()
     delt <- stop.time - start.time
     cat("Run #", j, " computation time", round(as.numeric(delt),2), units(delt), "\n")
+    print(summary(BestModel[[j]]))
   }
   
   if (plot.flag) {

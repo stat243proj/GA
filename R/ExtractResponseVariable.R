@@ -17,6 +17,7 @@
 #'
 
 ExtractResponseVariable <- function(dataset, name){
+  # Check if the type of input is a dataframe
   if (!is.data.frame(dataset)){
     print("WARNING: The input data is not a data frame")
     stop()

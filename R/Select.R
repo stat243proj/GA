@@ -153,6 +153,7 @@ Select <- function(dataset, response.name, userfunc=NA, user.family="gaussian", 
     Last.Gen[[j]] <- generation.new
     Fitness[[j]] <- fitness
     Best.Model[[j]] <- best.model
+    print(summary(BestModel[[j]]))
     Best.Fitness[j] <- best.fitness
 
     # show run time

@@ -160,7 +160,7 @@ Select <- function(dataset, response.name, userfunc=NA, user.family="gaussian", 
     delt <- stop.time - start.time
     cat("Run #", j, " Computation Time", round(as.numeric(delt),2), units(delt), "\n")
     cat("Run #", j, " Final Model Summary: ", "\n")
-    print(summary(BestModel[[j]]))
+    print(summary(Best.Model[[j]]))
   }
   
   if (plot.flag) {

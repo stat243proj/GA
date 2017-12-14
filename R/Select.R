@@ -21,7 +21,7 @@
 #' @param plot.flag Set to TRUE to plot the evolution of the population of individuals over the
 #'   progression of the algorithm
 #'
-#' \value{ \code{Select()} produces a single list each of whose elements are a list.vector of objects
+#' @return \code{Select()} produces a single list each of whose elements are a list or vector of objects
 #'   partaining  to each of the \code{Nruns} times that the genetic algorithm was run.  Each
 #'   list element is named according the type of data it contains:
 #'   \itemize{
@@ -31,7 +31,6 @@
 #'     \item \code{BestModel} is a list of the best model produced during each run
 #'     \item \code{BestFitness} is a vector of the fitness of the best model from each run
 #'   }
-#' }
 #'
 #' @keywords linear regression optimization genetic algorithm
 #' @export

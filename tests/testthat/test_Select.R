@@ -22,8 +22,13 @@ test_that("Check the dimension of fitness matrix of the Select function with bas
   Niter <- 50
   output <- Select(baseball.dat, "salary", userfunc="AIC", user.family="gaussian", flag.log.scale=TRUE,
                    frac.replace=0.2, Niter=Niter, mutate.rate=FALSE, plot.flag=FALSE)
-  expect_equal(dim(output$fitness)[1], 40)
-  expect_equal(dim(output$fitness)[2], Niter)
+  
+  ###################
+  #I think output$fitness is a list contianing one element. So, I changed the way to access fitness matrix.
+  #expect_equal(dim(output$fitness)[1], 40)
+  expect_equal(dim((output$fitness)[[1]])[1], 40)
+  #expect_equal(dim(output$fitness)[2], Niter)
+  expect_equal(dim((output$fitness)[[1]])[2], Niter)
 })
 
 #test Select function with mtcars data

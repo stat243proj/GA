@@ -11,8 +11,8 @@ set.seed(7)
                    frac.replace=0.2, Niter=Niter, Nruns = 1, mutate.rate=FALSE, plot.flag=FALSE)
 
    #shouldn't we be looking at the sum of the absolute values of the residuals?
-   expect_lt(sum(output$bestModel$residuals), 1e-14)
-   expect_lt(output$bestFitness,541.0)
+   expect_lt(sum(output$BestModel$residuals), 1e-14)
+   expect_lt(output$BestFitness,541.0)
   })
 
 set.seed(7)
@@ -26,11 +26,11 @@ test_that("Check the dimension of fitness matrix of the Select function with bas
   ###################
   #I think output$fitness is a list contianing one element. So, I changed the way to access fitness matrix.
 
-  expect_equal(dim((output$fitness[[1]])[[1]])[1], 40)
-  expect_equal(dim((output$fitness[[2]])[[1]])[1], 40)
+  expect_equal(dim((output$Fitness[[1]]))[1], 40)
+  expect_equal(dim((output$Fitness[[2]]))[1], 40)
  
-  expect_equal(dim((output$fitness[[1]])[[1]])[2], Niter)
-  expect_equal(dim((output$fitness[[2]])[[1]])[2], Niter)
+  expect_equal(dim((output$Fitness[[1]]))[2], Niter)
+  expect_equal(dim((output$Fitness[[2]]))[2], Niter)
 })
 
 #test Select function with mtcars data

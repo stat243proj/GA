@@ -8,7 +8,7 @@ set.seed(7)
    baseball.dat = read.table(baseball.dataset,header=TRUE)
    Niter <- 50
   output <- Select(baseball.dat, "salary", userfunc="AIC", user.family="gaussian", flag.log.scale=TRUE,
-                   frac.replace=0.2, Niter=Niter, mutate.rate=FALSE, plot.flag=FALSE)
+                   frac.replace=0.2, Niter=Niter, Nruns = 1, mutate.rate=FALSE, plot.flag=FALSE)
 
    #shouldn't we be looking at the sum of the absolute values of the residuals?
    expect_lt(sum(output$bestModel$residuals), 1e-14)
@@ -21,14 +21,16 @@ test_that("Check the dimension of fitness matrix of the Select function with bas
   baseball.dat = read.table(baseball.dataset,header=TRUE)
   Niter <- 50
   output <- Select(baseball.dat, "salary", userfunc="AIC", user.family="gaussian", flag.log.scale=TRUE,
-                   frac.replace=0.2, Niter=Niter, mutate.rate=FALSE, plot.flag=FALSE)
+                   frac.replace=0.2, Niter=Niter, Nruns = 2, mutate.rate=FALSE, plot.flag=FALSE)
   
   ###################
   #I think output$fitness is a list contianing one element. So, I changed the way to access fitness matrix.
-  #expect_equal(dim(output$fitness)[1], 40)
-  expect_equal(dim((output$fitness)[[1]])[1], 40)
-  #expect_equal(dim(output$fitness)[2], Niter)
-  expect_equal(dim((output$fitness)[[1]])[2], Niter)
+
+  expect_equal(dim((output$fitness[[1]])[[1]])[1], 40)
+  expect_equal(dim((output$fitness[[2]])[[1]])[1], 40)
+ 
+  expect_equal(dim((output$fitness[[1]])[[1]])[2], Niter)
+  expect_equal(dim((output$fitness[[2]])[[1]])[2], Niter)
 })
 
 #test Select function with mtcars data

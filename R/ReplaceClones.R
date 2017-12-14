@@ -23,12 +23,15 @@
 
 ReplaceClones <- function(generation, fitness.vec) {
 
+  #Takes a generation list and corresponding fitness vector. Removes clones and replaces them with random individuals
+  #returns the edited generation list
+
   Ncovar <- length(generation[[1]])
   clone.index <- which(duplicated(fitness.vec))
   N.clones <- length(clone.index)
   replacements <- lapply(1:N.clones, function(x) {rbinom(Ncovar,1,0.5)}) # list of new individual genomes
   generation[clone.index] <- replacements
-  # the followin is to avoid computing fitness for the majority of non-clones
+  # the following is to avoid computing fitness for the majority of non-clones
   fitness.replacements <- sapply(replacements, AssessFitness, response = response, predictors = predictors)
   fitness.vec[clone.index] <- fitness.replacements
   output <- list("generation" = generation, "fitness" = fitness.vec)

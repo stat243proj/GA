@@ -20,8 +20,7 @@
 
 ExtractBestIndividual <- function(generation, fitness.vec){
 
-  #Extract the best individual and its corresponding fitness, and print a set of
-  #summary statistics
+  #Extract the best individual,its assocociated model and its corresponding fitnes. Returns a list
 
   best.index <- order(fitness.vec)[1]
 

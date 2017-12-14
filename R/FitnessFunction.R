@@ -18,22 +18,26 @@
 #' \code{\link{glm}}
 #' \code{\link{lm}}
 #' \code{\link{extractAIC}}
+
+
 FitnessFunction <- function(model, userfunc){
-  
+
+  #Takes a model output from glm and applies a fitness function. Default s AIC. The user can supply userfunc
+
   if ((class(userfunc) == "character")&&(userfunc == "AIC")) { # default case of Aikake Info Criteria
-    
+
     fitness.value <- extractAIC(model)[2]
     return(fitness.value)
-    
-  } 
-  
+
+  }
+
   if (class(userfunc) == "function") { # test if submitted function is a function object
-      
+
       fitness.value = userfunc(model)
       return(fitness.value)
-      
-    } 
+
+    }
   else {
-      print(paste0("WARNING: ", deparse(substitute(unserfunc)), "() is not a recognized function"))
+      print(paste0("WARNING: ", deparse(substitute(userfunc)), "() is not a recognized function"))
     }
   }

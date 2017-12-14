@@ -20,6 +20,9 @@
 
 Breed <- function(generation, fitness.vec, prob.mutate) {
 
+  #Takes a generation list, corresponing fitness and mutation probability vectors and calls CrossOverMutate to
+  #breed each pair of parents. The results are combined to make a list of children.
+
   # generation is a list with each element containing the genome of an individual
   # fitness.vec is a vector
   P <- length(fitness.vec)

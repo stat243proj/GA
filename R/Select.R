@@ -5,7 +5,6 @@
 #' of the genetic algorithm, a matrix of the fitness values of all individuals in all
 #' generations and the fitted model from glm for the best individual
 #'
-#' \strong{INPUTS}
 #' @param dataset A matrix, datatable, or dataframe
 #' @param response.name The name of the column in \strong{dataset} that will act as the
 #'   response variable to be predicted
@@ -22,16 +21,16 @@
 #' @param plot.flag Set to TRUE to plot the evolution of the population of individuals over the
 #'   progression of the algorithm
 #'
-#' \strong{OUTPUTS}
-#' \code{Select()} produces a single list each of whose elements are a list.vector of objects
+#' \value{ \code{Select()} produces a single list each of whose elements are a list.vector of objects
 #'   partaining  to each of the \code{Nruns} times that the genetic algorithm was run.  Each
 #'   list element is named according the type of data it contains:
-#' \itemize{
-#'   \item \code{LastGen} is a list of the last generation of solutions produced during each run
-#'   \item \code{Fitness} is a list of the complete fitness matrix representing all generations
-#'     during each run
-#'   \item \code{BestModel} is a list of the best model produced during each run
-#'   \item \code{BestFitness} is a vector of the fitness of the best model from each run
+#'   \itemize{
+#'     \item \code{LastGen} is a list of the last generation of solutions produced during each run
+#'     \item \code{Fitness} is a list of the complete fitness matrix representing all generations
+#'       during each run
+#'     \item \code{BestModel} is a list of the best model produced during each run
+#'     \item \code{BestFitness} is a vector of the fitness of the best model from each run
+#'   }
 #' }
 #'
 #' @keywords linear regression optimization genetic algorithm

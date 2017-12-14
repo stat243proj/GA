@@ -4,13 +4,10 @@
 \alias{ExtractResponseVariable}
 \title{Extract response variable from dataframe}
 \usage{
-ExtractResponseVariable(dataset, response.name)
+ExtractResponseVariable(dataset, name)
 }
 \arguments{
 \item{dataset}{A matrix, datatable, or dataframe}
-
-\item{response.name}{The name of the column in \strong{dataset} that will act as the
-response variable to be predicted}
 }
 \description{
 \code{ExtractResponseVariable()} allows the user to take a data table or dataframe

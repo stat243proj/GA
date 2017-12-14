@@ -16,7 +16,7 @@ indicated by ones while the co-variates that are exlcuded are indicated by zeros
 
 \item{predictors}{A data table or data frame of the co-variates (X)}
 
-\item{user.family}{Model family name to be passed to glm. Default is "gaussian"}
+\item{user.family}{Model family name to be passed to \code{glm}. Default is "gaussian"}
 
 \item{userfunc}{A fitness function that operates on a model that could be provided by the user.
 The default is the Aikake Information Criteria or "AIC".}

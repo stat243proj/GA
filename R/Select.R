@@ -158,7 +158,8 @@ Select <- function(dataset, response.name, userfunc=NA, user.family="gaussian", 
     # show run time
     stop.time <- Sys.time()
     delt <- stop.time - start.time
-    cat("Run #", j, " computation time", round(as.numeric(delt),2), units(delt), "\n")
+    cat("Run #", j, " Computation Time", round(as.numeric(delt),2), units(delt), "\n")
+    cat("Run #", j, " Final Model Summary: ", "\n")
     print(summary(BestModel[[j]]))
   }
   
